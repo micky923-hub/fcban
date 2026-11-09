@@ -969,6 +969,14 @@ export default {
               "reviewedAt": null
             },
             {
+              "id": "cm-physical",
+              "name": "노인신체기능검사",
+              "cycle": "66세",
+              "test": "신체기능 측정",
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null
+            },
+            {
               "id": "cm-mental",
               "name": "정신건강검사(우울증)",
               "cycle": "60세",
