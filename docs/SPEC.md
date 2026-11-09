@@ -226,6 +226,6 @@ ageCalendar(birthISO, baseISO, rules) -> { fullAge, nextBirthday, daysToBirthday
 ## 8. 열린 질문 (운영자 결정 대기 — 구현을 막지 않음)
 
 1. 뉴스레터 발행 요일·시간 — 기본값 목요일 09:00으로 구현.
-2. 도메인 — 서브도메인 vs 독립 도메인. GitHub Pages CNAME은 비워 둔다.
+2. 도메인 — **결정(2026-11-10): `https://fcban.bluem-partners.com/`** (bluem-partners.com 서브도메인). 저장소 루트 `CNAME` 파일, `assets/config.js` `SITE_URL`.
 3. 카카오 디벨로퍼스 JS 앱 키 — `assets/config.js`에 `KAKAO_JS_KEY` 빈 값, 없으면 공유 버튼 비활성.
 4. 사이트 CSS의 실제 글꼴·보조색 — 확인되면 base.css 토큰만 교체.

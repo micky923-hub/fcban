@@ -9,7 +9,7 @@ export default {
   /** 카카오톡 채널 홈 (예: https://pf.kakao.com/_xxxxx) */
   KAKAO_CHANNEL_URL: '',
   /** 공용 사이트 주소(끝 / 포함). 비우면 현재 origin 을 쓴다 */
-  SITE_URL: '',
+  SITE_URL: 'https://fcban.bluem-partners.com/', // 운영자 결정 2026-11-10 (SPEC §8-2) — 바꾸면 CNAME 도 같이
   /** 공유 고정 썸네일(절대 URL, 1200×600 권장). 비우면 텍스트형 공유 */
   SHARE_THUMB_URL: '',
   /** 사업자 정보 페이지 */

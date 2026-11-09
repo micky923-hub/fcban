@@ -97,3 +97,13 @@ test('입력 오류 문구는 필드 아래 한 줄(aria-live) — 모달·알�
   const est = readFileSync(join(ROOT, 'estate/estate.js'), 'utf8');
   assert.match(est, /submit\.disabled = !requiredFilled\(\)/, '값이 틀려도 버튼은 활성(필수값 미입력만 비활성)');
 });
+
+test('사이트 주소: config.SITE_URL 과 CNAME 이 같은 호스트, 쿼리·해시 없음', async () => {
+  const { default: config } = await import('../assets/config.js');
+  const u = new URL(config.SITE_URL);
+  assert.equal(u.protocol, 'https:');
+  assert.equal(u.search + u.hash, '');
+  assert.ok(u.pathname.endsWith('/'));
+  assert.equal(readFileSync(join(ROOT, 'CNAME'), 'utf8').trim(), u.host);
+  assert.equal(siteBasePath(config.SITE_URL), u.pathname);
+});
