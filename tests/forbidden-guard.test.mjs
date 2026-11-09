@@ -21,14 +21,14 @@ export function tier1Hits(text) {
 }
 
 // 생성물·원본 데이터 복사본(운영자 확정 파일)은 제외하고, 직접 작성한 파일만 본다.
-const SKIP = new Set(['assets/copy.ko.json', 'assets/copy.ko.data.js', 'assets/ageRules.json', 'assets/ageRules.data.js']);
-const DIRS = ['assets', 'calendar', 'scripts', 'tests'];
+const SKIP = new Set(['assets/copy.ko.json', 'assets/copy.ko.data.js', 'assets/ageRules.json', 'assets/ageRules.data.js', 'assets/healthData.data.js']);
+const DIRS = ['assets', 'calendar', 'health', 'scripts', 'tests'];
 function* walk(dir) {
   if (!existsSync(dir)) return;
   for (const name of readdirSync(dir)) {
     const p = join(dir, name);
     if (statSync(p).isDirectory()) yield* walk(p);
-    else if (/\.(m?js|html|css)$/.test(name)) yield p;
+    else if (/\.(m?js|html|css|json)$/.test(name)) yield p;
   }
 }
 
@@ -42,8 +42,8 @@ test('직접 작성한 코드·화면에 1군 단어가 없다', () => {
   }
 });
 
-// 달력·허브 화면이 렌더하는 카피 경로
-const RENDERED = ['brand', 'disclaimer.general', 'disclaimer.pension', 'calendar', 'hub', 'newsletter.donguiLabel'];
+// 달력·허브·건강 체크 화면이 렌더하는 카피 경로
+const RENDERED = ['brand', 'disclaimer.general', 'disclaimer.pension', 'calendar', 'hub', 'newsletter.donguiLabel', 'health'];
 const get = (o, path) => path.split('.').reduce((a, k) => a[k], o);
 
 for (const path of RENDERED) {

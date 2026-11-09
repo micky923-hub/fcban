@@ -29,6 +29,8 @@ export const LABELS = {
   insuranceAgeTitle: '보험나이와 상령일',
   resultHeading: '결과',
   monthDay: '{m}월 {d}일',
+  draft: '초안',
+  noCancerScreening: '이 나이대의 국가암검진 항목은 없습니다.',
 };
 
 /** 작은 DOM 헬퍼: 텍스트는 항상 textContent 로 넣는다 */

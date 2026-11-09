@@ -7,9 +7,11 @@ import { dirname, join } from 'node:path';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 export const SYNCED = ['ageRules', 'copy.ko'];
+/** 원본이 assets/ 에 있는 데이터(SPEC 파일 구조) — .data.js 모듈만 만든다 */
+export const ASSET_SOURCED = ['healthData'];
 
-export function moduleSource(name, json) {
-  return `// 생성 파일 — 직접 고치지 않는다. 원본: data/${name}.json (node scripts/sync-data.mjs)\nexport default ${JSON.stringify(JSON.parse(json), null, 2)};\n`;
+export function moduleSource(name, json, from = `data/${name}.json`) {
+  return `// 생성 파일 — 직접 고치지 않는다. 원본: ${from} (node scripts/sync-data.mjs)\nexport default ${JSON.stringify(JSON.parse(json), null, 2)};\n`;
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
@@ -17,6 +19,11 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     const json = readFileSync(join(root, 'data', `${name}.json`), 'utf8');
     writeFileSync(join(root, 'assets', `${name}.json`), json);
     writeFileSync(join(root, 'assets', `${name}.data.js`), moduleSource(name, json));
+    console.log(`synced ${name}`);
+  }
+  for (const name of ASSET_SOURCED) {
+    const json = readFileSync(join(root, 'assets', `${name}.json`), 'utf8');
+    writeFileSync(join(root, 'assets', `${name}.data.js`), moduleSource(name, json, `assets/${name}.json`));
     console.log(`synced ${name}`);
   }
 }

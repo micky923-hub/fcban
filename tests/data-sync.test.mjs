@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT, readJSON } from './_load.mjs';
-import { SYNCED } from '../scripts/sync-data.mjs';
+import { SYNCED, ASSET_SOURCED } from '../scripts/sync-data.mjs';
 
 for (const name of SYNCED) {
   test(`assets/${name}.json = data/${name}.json`, () => {
@@ -13,5 +13,12 @@ for (const name of SYNCED) {
   test(`assets/${name}.data.js = data/${name}.json`, async () => {
     const mod = await import(join(ROOT, 'assets', `${name}.data.js`));
     assert.deepEqual(mod.default, readJSON(`data/${name}.json`));
+  });
+}
+
+for (const name of ASSET_SOURCED) {
+  test(`assets/${name}.data.js = assets/${name}.json`, async () => {
+    const mod = await import(join(ROOT, 'assets', `${name}.data.js`));
+    assert.deepEqual(mod.default, readJSON(`assets/${name}.json`));
   });
 }

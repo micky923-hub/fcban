@@ -7,6 +7,7 @@
   "scripts": {
     "test": "node --test tests/*.test.mjs",
     "sync": "node scripts/sync-data.mjs",
+    "health-review": "node scripts/health-review.mjs",
     "serve": "node scripts/serve.mjs"
   },
   "engines": { "node": ">=20" }

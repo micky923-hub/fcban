@@ -5,6 +5,7 @@
 import { copy, h, mountPage, disclaimer, otherToolsLink, shareButton, setFieldError, bottomSheet, sitePath, LABELS } from '../assets/ui.js';
 import rules from '../assets/ageRules.data.js';
 import { ageCalendar, isValidISO, toISO, fill } from '../assets/ageCalendar.js';
+import { setAgeGroupHandoff, ageGroupFor } from '../assets/handoff.js';
 
 const C = copy.calendar;
 const R = C.result;
@@ -49,6 +50,7 @@ function validateBirth(iso, digits, today) {
 
 const main = mountPage(document.getElementById('app'), { title: C.title });
 const state = { birthISO: null, baseISO: null, baseOpen: false };
+let lastFullAge = null;
 
 // 입력 화면 (SB-02)
 const birthInput = h('input', {
@@ -163,6 +165,7 @@ function showInput({ reset = false, focus = true } = {}) {
 
 function showResult(push) {
   const res = ageCalendar(state.birthISO, state.baseISO, rules, { rowCopy: R.rows, parityWords: LABELS.parity });
+  lastFullAge = res.fullAge;
   resultView.replaceChildren(...renderResult(res));
   inputView.hidden = true;
   resultView.hidden = false;
@@ -205,13 +208,25 @@ function rowDateLabel(row) {
   return dotted(row.date);
 }
 
+/** 건강 체크로 넘어갈 때 나이대(예: 50s)만 한 번 넘긴다 — 생년월일·만 나이는 넘기지 않는다 */
+async function handOffAgeGroup(e) {
+  const href = e.currentTarget.href;
+  e.preventDefault();
+  try {
+    const { default: health } = await import('../assets/healthData.data.js');
+    setAgeGroupHandoff(ageGroupFor(lastFullAge, health.ageGroups));
+  } finally {
+    location.assign(href);
+  }
+}
+
 function rowSub(row) {
   const sub = h('p', { class: 'timeline__sub' });
   // '… · 암검진 항목은 건강 체크 →' 의 화살표 구간은 건강 체크로 가는 링크
   if (row.key === 'checkupNext' && row.sub.endsWith('→')) {
     const parts = row.sub.split(' · ');
     const linkText = parts.pop();
-    sub.append(parts.length ? `${parts.join(' · ')} · ` : '', h('a', { href: sitePath('health/'), text: linkText }));
+    sub.append(parts.length ? `${parts.join(' · ')} · ` : '', h('a', { href: sitePath('health/'), text: linkText, onclick: handOffAgeGroup }));
   } else {
     sub.textContent = row.sub;
   }
