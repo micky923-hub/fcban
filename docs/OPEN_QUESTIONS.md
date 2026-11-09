@@ -16,3 +16,7 @@ SPEC §8의 1–4번은 그대로 유효하며, 아래는 순서 0·1 작업 중
 | Q9 | 브라우저에서 JSON을 `import … with { type: 'json' }`로 읽으면 iOS 17.2 미만 Safari에서 페이지 전체가 열리지 않는다(50–70대 고객의 구형 기기). | `scripts/sync-data.mjs`가 `data/*.json` → `assets/*.json` 복사본과 함께 `assets/*.data.js`(ES 모듈)를 생성하고, 화면은 `.data.js`를 import. 일치 여부는 `tests/data-sync.test.mjs`가 검사. | data 수정 후 `npm run sync` |
 | Q10 | 카카오 JS SDK의 정확한 버전·SRI 해시, 채널 홈 주소, 공유 썸네일 URL, 사업자 정보 페이지 주소. | `assets/config.js`에 SDK URL(2.7.4, 버전 확인 필요)만 두고 나머지는 빈 값 → 공유·채널 추가 버튼 비활성. 사업자 정보는 임시로 bluem-partners.com. | `assets/config.js` |
 | Q11 | 기존 사이트처럼 허브 헤더에 로고만 둘지, 도구 화면 헤더를 "← 도구 이름"으로 할지. | PNG 기준: 허브는 "파이낸셜 다이어리", 도구 화면은 "← 내 나이 달력"(탭하면 허브). | — |
+| Q12 | 허브가 `content/weekly.json`을 실행 중에 요청(fetch)할지, 빌드 때 심을지. SPEC은 "서버 호출 없음 · LCP 1.5초". | **빌드 때 심음.** `scripts/inline-weekly.mjs`가 `index.html`의 `<script type="application/json" id="weekly-data">`에 넣는다. 비어 있거나 형식이 틀리면 영역 숨김. 순서 5의 `build.mjs`가 이 스크립트를 호출하도록 연결 예정. | 순서 5 |
+| Q13 | sb-07의 "이번 주 다이어리" 오른쪽 날짜(“11월 2…”로 잘려 보임)의 형식과 데이터 필드. SPEC의 weekly.json 필드(title, slug, donguiLine, readMin)에는 날짜가 없다. | 선택 필드 `publishedAt`(YYYY-MM-DD)을 받으면 "11월 12일"로 표시, 없으면 생략. 표기 `{m}월 {d}일`은 `LABELS.monthDay`(Q4와 같이 copy 이동 대상). | 순서 5 weekly.json 스키마 |
+| Q14 | 허브 히어로 `copy.hub.hero`는 한 줄 문자열인데 PNG는 두 줄("내 삶의 숫자를 / 쉽게 확인하세요"). | copy는 그대로 두고 제목 폭(7.6em)으로 두 줄 줄바꿈. | copy에 `\n` 넣을지 |
+| Q15 | 허브의 건강 체크·상속·증여 카드와 달력의 "건강 체크 →"는 순서 3·4 전까지 404. | 링크는 그대로 둠(경로 고정: `health/`, `estate/`). | 순서 3·4 |

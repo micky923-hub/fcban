@@ -28,6 +28,7 @@ export const LABELS = {
   infoAria: '설명 보기',
   insuranceAgeTitle: '보험나이와 상령일',
   resultHeading: '결과',
+  monthDay: '{m}월 {d}일',
 };
 
 /** 작은 DOM 헬퍼: 텍스트는 항상 textContent 로 넣는다 */

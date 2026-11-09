@@ -32,16 +32,18 @@ function* walk(dir) {
   }
 }
 
+const ROOT_FILES = ['index.html', 'index.js'].map((f) => join(ROOT, f)).filter(existsSync);
+
 test('직접 작성한 코드·화면에 1군 단어가 없다', () => {
-  for (const d of DIRS) for (const f of walk(join(ROOT, d))) {
+  for (const f of [...ROOT_FILES, ...DIRS.flatMap((d) => [...walk(join(ROOT, d))])]) {
     const rel = relative(ROOT, f);
     if (SKIP.has(rel)) continue;
     assert.deepEqual(tier1Hits(readFileSync(f, 'utf8')), [], rel);
   }
 });
 
-// 달력 화면이 렌더하는 카피 경로
-const RENDERED = ['brand', 'disclaimer.general', 'disclaimer.pension', 'calendar', 'hub.otherTools', 'hub.share', 'hub.kakaoAdd'];
+// 달력·허브 화면이 렌더하는 카피 경로
+const RENDERED = ['brand', 'disclaimer.general', 'disclaimer.pension', 'calendar', 'hub', 'newsletter.donguiLabel'];
 const get = (o, path) => path.split('.').reduce((a, k) => a[k], o);
 
 for (const path of RENDERED) {
