@@ -31,7 +31,37 @@ export const LABELS = {
   monthDay: '{m}월 {d}일',
   draft: '초안',
   noCancerScreening: '이 나이대의 국가암검진 항목은 없습니다.',
+  estate: {
+    over: '초과',
+    upTo: '이하',
+    approx: '약 {v}',
+    won: '{v} 원',
+    plus: ' + ',
+    children: '자녀 {n}',
+    minors: '미성년 {n}',
+    parts: {
+      lumpSum: '일괄공제',
+      basic: '기초공제',
+      personal: '자녀 공제',
+      spouseMin: '배우자공제 최소',
+      'rel:spouse': '배우자 공제',
+      'rel:linealDescendant_adult': '성년 자녀 공제',
+      'rel:linealDescendant_minor': '미성년 자녀 공제',
+      'rel:otherRelative': '기타 친족 공제',
+      marriageBirth: '혼인·출산 공제',
+    },
+    barDeduction: '공제',
+    barTaxable: '과세',
+    barAllDeducted: '전액 공제 범위',
+    amountError: '0.1부터 999까지, 소수 첫째 자리까지 입력해 주세요',
+    countError: '0부터 {max}까지 숫자로 입력해 주세요',
+    minorsError: '미성년 자녀 수는 자녀 수 이하로 입력해 주세요',
+    giftLink: '국세청 증여세 안내 바로가기 ↗',
+  },
 };
+
+/** '{key}' 자리표시자 치환 */
+export const fill = (t, v) => String(t).replace(/\{(\w+)\}/g, (_, k) => (k in v ? String(v[k]) : `{${k}}`));
 
 /** 작은 DOM 헬퍼: 텍스트는 항상 textContent 로 넣는다 */
 export function h(tag, attrs = {}, ...children) {

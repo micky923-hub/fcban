@@ -57,6 +57,20 @@
   "displayRules": {
     "roundTo": "억·천만 단위 반올림. 결과는 '약 ○억 ○천만 원' 범위 표기",
     "zeroTaxCardText": "세금이 생기지 않는 범위입니다",
-    "externalLink": { "label": "국세청 상속세 안내 바로가기 ↗", "note": "실제 URL은 구현 시 국세청 공식 페이지로 설정" }
+    "externalLink": { "label": "국세청 상속세 안내 바로가기 ↗", "note": "실제 URL은 구현 시 국세청 공식 페이지로 설정", "url": "https://www.nts.go.kr/" },
+    "estimateRange": {
+      "rule": "예상 세액 범위: 하한 = 산출세액 × (1 − 신고세액공제율)을 내림, 상한 = 산출세액을 올림. 각 값은 units 중 그 값 이하인 가장 큰 단위(천만 → 백만 → 십만)로 맞춘다.",
+      "reportCreditRate": 0.03,
+      "reportCreditSource": "상속세 및 증여세법 §69(신고세액공제) — S-TAX-02 범위 밖, 출처 대조 필요",
+      "units": [10000000, 1000000, 100000]
+    },
+    "roundToUnit": 10000000
+  },
+  "input": {
+    "rule": "재산 입력: 억 원 단위, 소수 1자리, 0.1–999. 자녀·미성년 자녀 수는 0 이상 정수.",
+    "amountEokMin": 0.1,
+    "amountEokMax": 999,
+    "amountDecimals": 1,
+    "childrenMax": 20
   }
 }

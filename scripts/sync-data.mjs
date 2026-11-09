@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-export const SYNCED = ['ageRules', 'copy.ko'];
+export const SYNCED = ['ageRules', 'copy.ko', 'taxRules'];
 /** 원본이 assets/ 에 있는 데이터(SPEC 파일 구조) — .data.js 모듈만 만든다 */
 export const ASSET_SOURCED = ['healthData'];
 

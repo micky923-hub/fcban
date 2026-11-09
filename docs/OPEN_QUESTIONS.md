@@ -26,3 +26,10 @@ SPEC §8의 1–4번은 그대로 유효하며, 아래는 순서 0·1 작업 중
 | Q19 | 달력 → 건강 체크 나이대 자동 선택은 "세션 메모리"인데, 페이지가 바뀌면 메모리가 사라진다. | `sessionStorage`에 나이대 ID(예: `50s`)만 1회 저장 → 건강 체크가 읽는 즉시 삭제. 생년월일·만 나이는 넘기지 않음. 접근은 `assets/handoff.js` 한 곳(테스트로 강제). localStorage 미사용. | 허용 여부 확인 |
 | Q20 | 국가암검진 대상이 없는 나이대(20·30대 남성) 안내 문구가 copy에 없다. | `LABELS.noCancerScreening` "이 나이대의 국가암검진 항목은 없습니다." (Q4와 같이 copy 이동 대상). 같은 이유로 `LABELS.draft` '초안'. | copy.ko.json |
 | Q21 | `healthData.json` 위치: SPEC은 `assets/`, CLAUDE.md는 상수를 `data/`에서만 읽으라고 한다. | SPEC대로 `assets/healthData.json`을 원본으로 두고, 브라우저용 `assets/healthData.data.js`를 `npm run sync`로 생성. | — |
+| Q22 | 미성년 자녀 가산 공제(19세까지 연 1천만)는 자녀 나이가 있어야 계산된다. 입력은 '미성년 자녀 수'뿐이다. | 가산 **생략**(카드 제목 "최소 기준"과 일치). 미성년 수는 자녀 수 이하인지 검사만 한다. | 나이 입력 추가 여부 |
+| Q23 | SB-08 예시 "약 2천만 ~ 3천만 원"(산출세액 3천만)의 범위 규칙이 명세에 없다. | `taxRules.displayRules.estimateRange` 추가: 하한 = 산출세액 × (1 − 신고세액공제 3%) 내림, 상한 = 산출세액 올림, 단위는 값 크기에 따라 천만·백만·십만. 3%(상증법 §69)는 출처표 S-TAX-02 범위 밖이라 대조 필요. | taxRules.json |
+| Q24 | 배우자가 단독 상속인이면 법상 일괄공제(5억)를 쓸 수 없는데, 간이 공식은 이를 구분하지 않는다(배우자 있음 · 자녀 0). | taxRules 간이 공식 그대로(일괄 5억 + 배우자 최소 5억). | 공식 보완 여부 |
+| Q25 | 상속·증여 화면 보조 문구가 copy에 없다: 입력 오류 3종, 공제 내역 라벨(일괄공제·배우자공제 최소·성년 자녀 공제 등), 막대 라벨(공제·과세·전액 공제 범위), 증여 탭 외부 링크 "국세청 증여세 안내 바로가기 ↗". | `LABELS.estate`에 모음(Q4와 같이 copy 이동 대상). | copy.ko.json |
+| Q26 | 국세청 안내 페이지의 정확한 주소. | `taxRules.displayRules.externalLink.url` = 국세청 대표 주소(https://www.nts.go.kr/), 새 탭. | taxRules.json |
+| Q27 | `taxRules.inheritance.noChildNoSpouseText` 끝이 "확인하세요"(Q2와 같은 문제). | 그대로 렌더. | taxRules.json |
+| Q28 | 고지문: 입력 화면은 `disclaimer.tax`(SB-07), 결과 화면은 PNG(sb-14)대로 `disclaimer.taxShort`. | 그렇게 구현. 결과 화면에서도 전체 문구가 필요하면 추가. | — |

@@ -21,8 +21,8 @@ export function tier1Hits(text) {
 }
 
 // 생성물·원본 데이터 복사본(운영자 확정 파일)은 제외하고, 직접 작성한 파일만 본다.
-const SKIP = new Set(['assets/copy.ko.json', 'assets/copy.ko.data.js', 'assets/ageRules.json', 'assets/ageRules.data.js', 'assets/healthData.data.js']);
-const DIRS = ['assets', 'calendar', 'health', 'scripts', 'tests'];
+const SKIP = new Set(['assets/copy.ko.json', 'assets/copy.ko.data.js', 'assets/ageRules.json', 'assets/ageRules.data.js', 'assets/healthData.data.js', 'assets/taxRules.json', 'assets/taxRules.data.js']);
+const DIRS = ['assets', 'calendar', 'health', 'estate', 'scripts', 'tests'];
 function* walk(dir) {
   if (!existsSync(dir)) return;
   for (const name of readdirSync(dir)) {
@@ -42,8 +42,8 @@ test('직접 작성한 코드·화면에 1군 단어가 없다', () => {
   }
 });
 
-// 달력·허브·건강 체크 화면이 렌더하는 카피 경로
-const RENDERED = ['brand', 'disclaimer.general', 'disclaimer.pension', 'calendar', 'hub', 'newsletter.donguiLabel', 'health'];
+// 달력·허브·건강 체크·상속증여 화면이 렌더하는 카피 경로
+const RENDERED = ['brand', 'disclaimer', 'calendar', 'hub', 'newsletter.donguiLabel', 'health', 'estate'];
 const get = (o, path) => path.split('.').reduce((a, k) => a[k], o);
 
 for (const path of RENDERED) {
@@ -55,4 +55,9 @@ for (const path of RENDERED) {
 test('검사기 자체 확인: 화이트리스트 단어는 통과, 1군 패턴은 검출', () => {
   assert.deepEqual(tier1Hits('보험나이와 상령일, 국민건강보험공단'), []);
   assert.ok(tier1Hits(dict.tier1_block.words[0]).length > 0);
+});
+
+test('상속·증여 화면이 렌더하는 taxRules 문구에 1군 단어가 없다', () => {
+  const tax = readJSON('data/taxRules.json');
+  assert.deepEqual(tier1Hits([tax.inheritance.noChildNoSpouseText, tax.displayRules.externalLink.label].join(' ')), []);
 });
