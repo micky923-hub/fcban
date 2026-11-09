@@ -34,10 +34,16 @@ SPEC §8의 1–4번은 그대로 유효하며, 아래는 순서 0·1 작업 중
 | Q27 | `taxRules.inheritance.noChildNoSpouseText` 끝이 "확인하세요"(Q2와 같은 문제). | 그대로 렌더. | taxRules.json |
 | Q28 | 고지문: 입력 화면은 `disclaimer.tax`(SB-07), 결과 화면은 PNG(sb-14)대로 `disclaimer.taxShort`. | 그렇게 구현. 결과 화면에서도 전체 문구가 필요하면 추가. | — |
 | Q29 | 원고 형식(마크다운)과 승인 표시. 승인은 순서 7(ops/review)에서 만들어진다. | front matter + `## 소제목` + `::: summary / dongui / sources` 블록(`scripts/lib/newsletter.mjs` 머리말). `approvedAt`·`approvedBy`가 없는 원고와 발행일이 오늘 이후인 원고는 페이지를 만들지 않음. 순서 7에서 승인 로그와 연결. | 순서 7 |
-| Q30 | 금지어 검사기(순서 6) 전에는 빌드가 검사 없이 발행할 수 있다. | 검사기(`ops/filter/filter.mjs`)가 없으면 **빌드 실패**. 확인용으로만 `--allow-missing-filter`. | 순서 6에서 제거 검토 |
+| Q30 | ~~검사기 전 빌드~~ — **해결(순서 6):** `ops/filter/filter.mjs`가 생겨 빌드가 원고마다 검사, block이면 실패. 검사기 파일이 없으면 여전히 실패(`--allow-missing-filter`는 확인용으로만 남김). | 해결 | — |
 | Q31 | 본문 글자 수 셈법(공백 포함 여부)과 읽는 시간 기준이 명세에 없다. | 공백은 하나로 줄여 포함, 마크다운 기호·출처 표시 제외. 읽는 시간 = (본문 + 요약 + 동의보감) ÷ 분당 500자, 올림. `data/newsletterRules.json`. | newsletterRules.json |
 | Q32 | 핵심 요약 박스 위치: 표는 "본문 상단", 화면 예시는 첫 문단 아래. | 첫 문단 바로 뒤. | — |
 | Q33 | 본문 출처 표시 `[S-XXX-NN]`(근거 검사용)를 독자 화면에 어떻게 보일지. | 출처 목록 번호 `[1]`로 바꿔 작게 표시하고 출처 목록으로 연결. 출처 ID 존재 여부(`ops/sources/index.json`) 확인은 순서 6. | — |
 | Q34 | 빌드 산출물(`diary/`, `content/weekly.json`, `index.html` 주간 글 자리)을 저장소에 커밋해 GitHub Pages로 내보낼지. 자동 배포(Actions)는 발행 자동화에 해당할 수 있다. | 운영자가 빌드 → 확인 → 커밋·푸시하는 수동 경로 전제. Actions 미구성. | 배포 방식 결정 |
 | Q35 | 카드뉴스 이미지 1장(선택)과 "운영자 한마디" 슬롯. | 이번 순서에서는 구현하지 않음(SB-09 구성 슬롯에 없음, 운영자 한마디는 SB-10 채널 메시지). | 필요 시 추가 |
 | Q36 | 동의보감 '실천 한 가지' 문장 어미("맞춰 봅니다")는 권유형과 정보형의 경계. | 예시 원고에서만 사용. 문장 규칙은 순서 6 검사기에서 확정. | 순서 6 |
+| Q37 | SB-12 ③ '재작성 제안'(금지어 없는 대안 문장 + 출처 ID)은 에이전트(AI)가 만드는 기능이다. 외부 AI 호출 경로·에이전트 서버는 아직 없다. | 검사기는 검출·위치·문장까지만. 제안 칸은 순서 7(검토 대기열)에서 에이전트 연결 방식과 함께 결정. | 순서 7 |
+| Q38 | `ux_writing.forbiddenEndings`(하세요·챙기세요 등)의 처리 등급이 사전에 없다. | **경고(warn)** 로 처리, 허브 히어로 문장만 예외. | forbidden-words.json에 action 추가 여부 |
+| Q39 | 사이트 카피 검사 결과 경고 3건: `disclaimer.general` "확인하세요"(Q2), `calendar.result.insuranceAgeInfo` "보험에서"(Q2), `kakao.oneTimeInvite` "늘 건강하세요."(새로 확인). 1군은 0건. | 확정 카피라 그대로 둠. | copy.ko.json 개정 여부 |
+| Q40 | CLAUDE.md 규칙 5는 `ops/` 폴더를 `/sources /drafts /approved /published /logs`로 한정하지만, SPEC과 CLAUDE.md 명령은 `ops/filter`·`ops/review` 코드 폴더를 둔다. | 콘텐츠 폴더 5개 + 코드 폴더 2개(filter·review)만 허용 — 고객 폴더 없음을 `tests/filter.test.mjs`가 검사. | 해석 확인 |
+| Q41 | 근거 검사 패턴 `(세율|공제|한도|기준|…)`는 단어만으로도 걸려, 상속·증여 글은 거의 모든 문장에 출처 ID가 필요하다. 문단 끝에 출처 ID를 두면 그 문단 전체가 통과한다. | 사전 그대로 적용. | 패턴 범위 조정 여부 |
+| Q42 | 소스 라이브러리 초기 색인은 data 파일의 출처표 10건을 옮긴 것이다(url·path 대부분 빈 값). 동의보감 라이브러리는 비어 있다. | `ops/sources/index.json` + 주제 폴더 4개(health·tax·age·dongui). | 운영자가 원문·주소 채움 |

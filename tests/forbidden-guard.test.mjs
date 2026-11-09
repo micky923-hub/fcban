@@ -22,7 +22,7 @@ export function tier1Hits(text) {
 
 // 생성물·원본 데이터 복사본(운영자 확정 파일)은 제외하고, 직접 작성한 파일만 본다.
 const SKIP = new Set(['assets/copy.ko.json', 'assets/copy.ko.data.js', 'assets/ageRules.json', 'assets/ageRules.data.js', 'assets/healthData.data.js', 'assets/taxRules.json', 'assets/taxRules.data.js']);
-const DIRS = ['assets', 'calendar', 'health', 'estate', 'scripts', 'tests'];
+const DIRS = ['assets', 'calendar', 'health', 'estate', 'scripts', 'tests', 'ops'];
 function* walk(dir) {
   if (!existsSync(dir)) return;
   for (const name of readdirSync(dir)) {

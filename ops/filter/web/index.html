@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>금지어·근거 검사 · 운영자</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/base.css">
+  <style>
+    /* 운영자 화면 — 색은 base.css 토큰. 하이라이트: 1군 빨강, 2군 노랑, 근거 없음 주황 */
+    body { background: var(--c-bg-soft); }
+    .ops { max-width: 1180px; margin: 0 auto; padding: var(--sp-5) var(--gutter); display: flex; flex-direction: column; gap: var(--sp-4); }
+    .ops-top { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); }
+    .ops-top h1 { font-size: 20px; font-weight: 700; }
+    .verdict { display: inline-flex; align-items: center; min-height: 40px; padding: 0 var(--sp-5); border-radius: 999px; color: var(--c-white); font-weight: 700; }
+    .verdict--block { background: var(--c-error); }
+    .verdict--warn { background: var(--c-warn); }
+    .verdict--pass { background: var(--c-ok); }
+    .grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: var(--sp-4); align-items: start; }
+    @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+    .panel { background: var(--c-white); border: 1px solid var(--c-line); border-radius: var(--radius); padding: var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-3); }
+    .panel h2 { font-size: 15px; font-weight: 700; }
+    textarea { width: 100%; min-height: 280px; padding: var(--sp-3); border: 1px solid var(--c-line); border-radius: var(--radius); font: 15px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace; resize: vertical; }
+    .row { display: flex; gap: var(--sp-3); align-items: center; flex-wrap: wrap; }
+    .preview { white-space: pre-wrap; font-size: 15px; line-height: 1.8; max-height: 520px; overflow: auto; }
+    mark { border-radius: 3px; padding: 0 1px; color: inherit; }
+    mark.t1 { background: var(--hl-1); outline: 1px solid var(--c-error); }
+    mark.t2, mark.tending { background: var(--hl-2); }
+    mark.tevidence { background: var(--hl-ev); }
+    .findings { display: flex; flex-direction: column; gap: var(--sp-2); }
+    .finding { display: flex; gap: var(--sp-3); align-items: flex-start; padding: var(--sp-3); border: 1px solid var(--c-line); border-radius: var(--radius); }
+    .chip-t { flex: none; min-width: 52px; text-align: center; padding: 2px 8px; border-radius: 999px; color: var(--c-white); font-size: 13px; font-weight: 700; }
+    .chip-t--1, .chip-t--required { background: var(--c-error); }
+    .chip-t--evidence { background: var(--c-ev); }
+    .chip-t--2, .chip-t--ending { background: var(--c-warn); }
+    .chip-t--ok { background: var(--c-ok); }
+    .finding__main { display: flex; flex-direction: column; gap: 2px; font-size: 14px; }
+    .finding__main strong { font-size: 15px; }
+    .finding__loc { color: var(--c-muted); font-size: 13px; }
+    .meta { font-size: 12px; color: var(--c-muted); }
+    .notice { padding: var(--sp-3); border: 1px solid var(--c-error); background: var(--hl-1); color: var(--c-error); border-radius: var(--radius); font-size: 13px; }
+    .mode label { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin-right: var(--sp-3); font-size: 14px; }
+  </style>
+</head>
+<body>
+  <main class="ops" id="app">
+    <div class="ops-top">
+      <h1>금지어·근거 검사</h1>
+      <span class="verdict" id="verdict" hidden></span>
+    </div>
+    <div class="grid">
+      <section class="panel" aria-labelledby="in-title">
+        <h2 id="in-title">원고 (마크다운 또는 문장)</h2>
+        <textarea id="text" spellcheck="false" aria-label="검사할 원고"></textarea>
+        <div class="row mode" role="radiogroup" aria-label="검사 종류">
+          <label><input type="radio" name="mode" value="content" checked> 콘텐츠 (1·2군 + 근거 + 필수 요건)</label>
+          <label><input type="radio" name="mode" value="ui"> 사이트 문구 (1·2군·어미만)</label>
+        </div>
+        <div class="row">
+          <button class="btn btn--primary" id="run" type="button">검사</button>
+          <span class="meta" id="meta"></span>
+        </div>
+        <h2>본문 하이라이트</h2>
+        <div class="preview" id="preview" aria-live="polite"></div>
+      </section>
+      <section class="panel" aria-labelledby="out-title">
+        <h2 id="out-title">검출 결과</h2>
+        <div class="findings" id="findings"></div>
+        <p class="notice">1군 또는 근거 없는 수치가 있으면 검토 대기열(ops/review)에 승인 버튼이 렌더되지 않습니다. 운영자가 임의로 우회할 수 없습니다.</p>
+      </section>
+    </div>
+  </main>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
