@@ -43,7 +43,7 @@ test('직접 작성한 코드·화면에 1군 단어가 없다', () => {
 });
 
 // 달력·허브·건강 체크·상속증여 화면이 렌더하는 카피 경로
-const RENDERED = ['brand', 'disclaimer', 'calendar', 'hub', 'newsletter.donguiLabel', 'health', 'estate'];
+const RENDERED = ['brand', 'disclaimer', 'calendar', 'hub', 'newsletter', 'health', 'estate'];
 const get = (o, path) => path.split('.').reduce((a, k) => a[k], o);
 
 for (const path of RENDERED) {

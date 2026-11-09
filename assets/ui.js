@@ -28,7 +28,6 @@ export const LABELS = {
   infoAria: '설명 보기',
   insuranceAgeTitle: '보험나이와 상령일',
   resultHeading: '결과',
-  monthDay: '{m}월 {d}일',
   draft: '초안',
   noCancerScreening: '이 나이대의 국가암검진 항목은 없습니다.',
   estate: {

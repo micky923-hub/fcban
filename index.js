@@ -1,6 +1,6 @@
 // 허브 (SB-01): 이번 주 다이어리 → 도구 3개 → 채널 추가.
 // 실행 중 서버 요청 없음 — 주간 글은 index.html 에 빌드 때 심은 JSON 을 읽는다. 공유 버튼 없음.
-import { copy, h, mountPage, channelButton, sitePath, LABELS } from './assets/ui.js';
+import { copy, h, mountPage, channelButton, sitePath } from './assets/ui.js';
 import { hubModel } from './assets/hub.js';
 
 function readWeekly() {
@@ -10,7 +10,7 @@ function readWeekly() {
   try { return JSON.parse(text); } catch { return null; }
 }
 
-const m = hubModel(copy, readWeekly(), LABELS);
+const m = hubModel(copy, readWeekly());
 const main = mountPage(document.getElementById('app'), {});
 
 const hero = h('section', { 'aria-labelledby': 'hub-title' },

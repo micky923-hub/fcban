@@ -4,7 +4,7 @@ const fill = (t, v) => String(t).replace(/\{(\w+)\}/g, (_, k) => (k in v ? Strin
 
 /**
  * content/weekly.json 한 건을 검사한다. 필수 필드가 하나라도 없으면 null(영역 숨김 — 빈 카드 금지).
- * 형식: { title, slug, donguiLine, readMin, publishedAt? }
+ * 형식: { title, slug, donguiLine, readMin, publishedAt?, weekLabel?, summary? } — scripts/build.mjs 가 만든다
  */
 export function normalizeWeekly(w) {
   if (!w || typeof w !== 'object') return null;
@@ -14,28 +14,22 @@ export function normalizeWeekly(w) {
   const readMin = Number(w.readMin);
   if (!title || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || !donguiLine || !Number.isInteger(readMin) || readMin < 1) return null;
   const publishedAt = typeof w.publishedAt === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(w.publishedAt) ? w.publishedAt : null;
-  return { title, slug, donguiLine, readMin, publishedAt };
-}
-
-/** 'YYYY-MM-DD' → '11월 12일' (문자열 연산만) */
-export function monthDayLabel(iso, labels) {
-  const [, m, d] = iso.split('-').map(Number);
-  return fill(labels.monthDay, { m, d });
+  const weekLabel = typeof w.weekLabel === 'string' && w.weekLabel.trim() ? w.weekLabel.trim() : null;
+  return { title, slug, donguiLine, readMin, publishedAt, weekLabel };
 }
 
 /**
  * @param {object} copy   copy.ko.json
  * @param {object|null} weeklyRaw  content/weekly.json 내용(없으면 null)
- * @param {object} labels  LABELS (monthDay)
  */
-export function hubModel(copy, weeklyRaw, labels) {
+export function hubModel(copy, weeklyRaw) {
   const w = normalizeWeekly(weeklyRaw);
   return {
     hero: copy.hub.hero,
     sub: copy.hub.sub,
     weekly: w && {
       label: copy.hub.weeklyLabel,
-      dateLabel: w.publishedAt ? monthDayLabel(w.publishedAt, labels) : null,
+      dateLabel: w.weekLabel, // 예: '11월 2주' (SB-01/09)
       title: w.title,
       path: `diary/${w.slug}/`,
       dongui: `${copy.newsletter.donguiLabel} · ${w.donguiLine}`,

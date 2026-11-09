@@ -1,0 +1,27 @@
+{
+  "_meta": {
+    "name": "newsletterRules",
+    "version": "2026-11-09",
+    "description": "뉴스레터 글(SB-09) 슬롯·분량 규칙. scripts/build.mjs 가 이 값으로 글을 검사하고, 하나라도 어기면 빌드를 실패시킨다."
+  },
+  "categories": [
+    { "id": "health", "label": "건강" },
+    { "id": "estate", "label": "상속·증여" },
+    { "id": "life", "label": "생활금융" },
+    { "id": "operator", "label": "운영자" }
+  ],
+  "body": {
+    "minChars": 800,
+    "maxChars": 1200,
+    "countRule": "본문(소제목·목록 포함) 글자 수. 공백은 하나로 줄여 포함, 마크다운 기호와 출처 표시 [S-XXX-NN] 제외.",
+    "subheadMin": 2,
+    "subheadMax": 3
+  },
+  "summary": { "minLines": 2, "maxLines": 3 },
+  "readTime": { "charsPerMinute": 500, "rule": "본문 + 핵심 요약 + 동의보감 글자 수 ÷ 분당 글자 수, 올림" },
+  "sources": { "min": 1, "idPattern": "^S-[A-Z]{2,5}-\\d{2}$" },
+  "tools": ["health", "estate", "calendar"],
+  "disclaimers": ["general", "tax"],
+  "weekLabel": { "format": "{m}월 {w}주", "rule": "발행일 기준 그 달의 몇째 주 = 올림(일 ÷ 7)" },
+  "slugPattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+}

@@ -8,24 +8,23 @@ import { hubModel, normalizeWeekly } from '../assets/hub.js';
 import { inlineWeekly } from '../scripts/inline-weekly.mjs';
 
 const copy = readJSON('data/copy.ko.json');
-const labels = { monthDay: '{m}월 {d}일' };
-const sample = { title: '제목', slug: 'week-01', donguiLine: '한 줄', readMin: 3, publishedAt: '2026-11-12' };
+const sample = { title: '제목', slug: 'week-01', donguiLine: '한 줄', readMin: 3, publishedAt: '2026-11-12', weekLabel: '11월 2주' };
 
 test('도구 카드 노출 순서: 건강 체크 → 상속·증여 → 내 나이 달력', () => {
-  const m = hubModel(copy, null, labels);
+  const m = hubModel(copy, null);
   assert.deepEqual(m.tools.map((t) => t.id), ['health', 'estate', 'calendar']);
   assert.deepEqual(m.tools.map((t) => t.n), [1, 2, 3]);
   assert.ok(m.tools.every((t) => !t.path.startsWith('/')), '상대 경로');
 });
 
 test('히어로·보조문은 확정 카피 그대로', () => {
-  const m = hubModel(copy, null, labels);
+  const m = hubModel(copy, null);
   assert.equal(m.hero, copy.hub.hero);
   assert.equal(m.sub, copy.hub.sub);
 });
 
 test('주간 글이 없거나 필드가 빠지면 영역 숨김(null)', () => {
-  assert.equal(hubModel(copy, null, labels).weekly, null);
+  assert.equal(hubModel(copy, null).weekly, null);
   for (const k of ['title', 'slug', 'donguiLine', 'readMin']) {
     const w = { ...sample }; delete w[k];
     assert.equal(normalizeWeekly(w), null, k);
@@ -36,12 +35,12 @@ test('주간 글이 없거나 필드가 빠지면 영역 숨김(null)', () => {
 });
 
 test('주간 글 카드: 읽는 시간·동의보감 한 줄·경로', () => {
-  const w = hubModel(copy, sample, labels).weekly;
+  const w = hubModel(copy, sample).weekly;
   assert.equal(w.readMore, copy.hub.readMore.replace('{min}', '3'));
   assert.equal(w.dongui, `${copy.newsletter.donguiLabel} · 한 줄`);
   assert.equal(w.path, 'diary/week-01/');
-  assert.equal(w.dateLabel, '11월 12일');
-  assert.equal(hubModel(copy, { ...sample, publishedAt: undefined }, labels).weekly.dateLabel, null);
+  assert.equal(w.dateLabel, '11월 2주');
+  assert.equal(hubModel(copy, { ...sample, weekLabel: undefined }).weekly.dateLabel, null);
 });
 
 test('inlineWeekly: index.html 자리에 넣고, </script> 를 이스케이프한다', () => {

@@ -17,7 +17,7 @@ SPEC §8의 1–4번은 그대로 유효하며, 아래는 순서 0·1 작업 중
 | Q10 | 카카오 JS SDK의 정확한 버전·SRI 해시, 채널 홈 주소, 공유 썸네일 URL, 사업자 정보 페이지 주소. | `assets/config.js`에 SDK URL(2.7.4, 버전 확인 필요)만 두고 나머지는 빈 값 → 공유·채널 추가 버튼 비활성. 사업자 정보는 임시로 bluem-partners.com. | `assets/config.js` |
 | Q11 | 기존 사이트처럼 허브 헤더에 로고만 둘지, 도구 화면 헤더를 "← 도구 이름"으로 할지. | PNG 기준: 허브는 "파이낸셜 다이어리", 도구 화면은 "← 내 나이 달력"(탭하면 허브). | — |
 | Q12 | 허브가 `content/weekly.json`을 실행 중에 요청(fetch)할지, 빌드 때 심을지. SPEC은 "서버 호출 없음 · LCP 1.5초". | **빌드 때 심음.** `scripts/inline-weekly.mjs`가 `index.html`의 `<script type="application/json" id="weekly-data">`에 넣는다. 비어 있거나 형식이 틀리면 영역 숨김. 순서 5의 `build.mjs`가 이 스크립트를 호출하도록 연결 예정. | 순서 5 |
-| Q13 | sb-07의 "이번 주 다이어리" 오른쪽 날짜(“11월 2…”로 잘려 보임)의 형식과 데이터 필드. SPEC의 weekly.json 필드(title, slug, donguiLine, readMin)에는 날짜가 없다. | 선택 필드 `publishedAt`(YYYY-MM-DD)을 받으면 "11월 12일"로 표시, 없으면 생략. 표기 `{m}월 {d}일`은 `LABELS.monthDay`(Q4와 같이 copy 이동 대상). | 순서 5 weekly.json 스키마 |
+| Q13 | ~~허브 "이번 주 다이어리" 날짜 형식~~ — **해결(순서 5): sb-15 기준 "11월 2주".** 빌드가 `weekLabel`(올림(일 ÷ 7)주)을 weekly.json에 넣고 허브는 그대로 표시. | 해결 | — |
 | Q14 | 허브 히어로 `copy.hub.hero`는 한 줄 문자열인데 PNG는 두 줄("내 삶의 숫자를 / 쉽게 확인하세요"). | copy는 그대로 두고 제목 폭(7.6em)으로 두 줄 줄바꿈. | copy에 `\n` 넣을지 |
 | Q15 | 허브의 건강 체크·상속·증여 카드와 달력의 "건강 체크 →"는 순서 3·4 전까지 404. | 링크는 그대로 둠(경로 고정: `health/`, `estate/`). | 순서 3·4 |
 | Q16 | **건강 데이터 초안의 정확성.** 초안 작성자는 국민건강보험공단·국립암센터 원문을 직접 열람하지 않았다. 특히 2025년 개정 가능 항목(정신건강검사 청년 주기, 골밀도 대상 연령, C형간염 검사 추가 여부), 국가암검진 연령 상한, 폐암 고위험군 흡연력 기준. | 전 항목 `reviewedAt: null`, `_meta.status: "draft"` → 화면 '초안' 배지. **확정 전 배포 금지.** | `docs/healthData-review.md` 체크표로 대조 |
@@ -33,3 +33,11 @@ SPEC §8의 1–4번은 그대로 유효하며, 아래는 순서 0·1 작업 중
 | Q26 | 국세청 안내 페이지의 정확한 주소. | `taxRules.displayRules.externalLink.url` = 국세청 대표 주소(https://www.nts.go.kr/), 새 탭. | taxRules.json |
 | Q27 | `taxRules.inheritance.noChildNoSpouseText` 끝이 "확인하세요"(Q2와 같은 문제). | 그대로 렌더. | taxRules.json |
 | Q28 | 고지문: 입력 화면은 `disclaimer.tax`(SB-07), 결과 화면은 PNG(sb-14)대로 `disclaimer.taxShort`. | 그렇게 구현. 결과 화면에서도 전체 문구가 필요하면 추가. | — |
+| Q29 | 원고 형식(마크다운)과 승인 표시. 승인은 순서 7(ops/review)에서 만들어진다. | front matter + `## 소제목` + `::: summary / dongui / sources` 블록(`scripts/lib/newsletter.mjs` 머리말). `approvedAt`·`approvedBy`가 없는 원고와 발행일이 오늘 이후인 원고는 페이지를 만들지 않음. 순서 7에서 승인 로그와 연결. | 순서 7 |
+| Q30 | 금지어 검사기(순서 6) 전에는 빌드가 검사 없이 발행할 수 있다. | 검사기(`ops/filter/filter.mjs`)가 없으면 **빌드 실패**. 확인용으로만 `--allow-missing-filter`. | 순서 6에서 제거 검토 |
+| Q31 | 본문 글자 수 셈법(공백 포함 여부)과 읽는 시간 기준이 명세에 없다. | 공백은 하나로 줄여 포함, 마크다운 기호·출처 표시 제외. 읽는 시간 = (본문 + 요약 + 동의보감) ÷ 분당 500자, 올림. `data/newsletterRules.json`. | newsletterRules.json |
+| Q32 | 핵심 요약 박스 위치: 표는 "본문 상단", 화면 예시는 첫 문단 아래. | 첫 문단 바로 뒤. | — |
+| Q33 | 본문 출처 표시 `[S-XXX-NN]`(근거 검사용)를 독자 화면에 어떻게 보일지. | 출처 목록 번호 `[1]`로 바꿔 작게 표시하고 출처 목록으로 연결. 출처 ID 존재 여부(`ops/sources/index.json`) 확인은 순서 6. | — |
+| Q34 | 빌드 산출물(`diary/`, `content/weekly.json`, `index.html` 주간 글 자리)을 저장소에 커밋해 GitHub Pages로 내보낼지. 자동 배포(Actions)는 발행 자동화에 해당할 수 있다. | 운영자가 빌드 → 확인 → 커밋·푸시하는 수동 경로 전제. Actions 미구성. | 배포 방식 결정 |
+| Q35 | 카드뉴스 이미지 1장(선택)과 "운영자 한마디" 슬롯. | 이번 순서에서는 구현하지 않음(SB-09 구성 슬롯에 없음, 운영자 한마디는 SB-10 채널 메시지). | 필요 시 추가 |
+| Q36 | 동의보감 '실천 한 가지' 문장 어미("맞춰 봅니다")는 권유형과 정보형의 경계. | 예시 원고에서만 사용. 문장 규칙은 순서 6 검사기에서 확정. | 순서 6 |
