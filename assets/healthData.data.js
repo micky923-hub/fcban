@@ -814,15 +814,6 @@ export default {
           "id": "common",
           "items": [
             {
-              "id": "cm-bone",
-              "name": "골밀도 검사",
-              "cycle": "54세",
-              "test": "골밀도 측정",
-              "sourceId": "S-HLT-01",
-              "reviewedAt": null,
-              "reviewNote": "여성 54·66세 — 2025년 대상 연령 추가 여부 확인"
-            },
-            {
               "id": "cm-lipid",
               "name": "이상지질혈증 검사",
               "cycle": "4년마다",
@@ -830,6 +821,14 @@ export default {
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "reviewNote": "남성 24세 이상 · 여성 40세 이상, 4년 주기 — 현행 기준 확인"
+            },
+            {
+              "id": "cm-lifestyle",
+              "name": "생활습관평가",
+              "cycle": "50세",
+              "test": "설문",
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null
             },
             {
               "id": "cm-mental",
