@@ -1,0 +1,81 @@
+{
+  "_meta": {
+    "function": "ageCalendar(birthISO, baseISO, rules) -> { fullAge, nextBirthday, daysToBirthday, insurance:{age,nextChange,daysToChange}, checkup:{eligibleThisYear,nextYear}, pension:{startAge,startDate,startMonth}, age65:{date} , rows:[...] }",
+    "rules": "data/ageRules.json",
+    "rowsRule": "rows는 기준일 이후 항목만, 날짜 오름차순, 최대 5행. 올해 검진 대상이면 첫 행에 강조색. 지난 항목(이미 시작된 국민연금 등)은 제외.",
+    "note": "D-day는 기준일 포함하지 않는 일수 차이(2026-11-09 → 2027-02-03 = 86)."
+  },
+  "cases": [
+    {
+      "id": "C1", "birth": "1974-02-03", "base": "2026-11-09",
+      "expect": {
+        "fullAge": 52, "nextBirthday": "2027-02-03", "daysToBirthday": 86,
+        "insurance": { "age": 53, "nextChange": "2027-08-03", "daysToChange": 267 },
+        "checkup": { "eligibleThisYear": true, "nextYear": 2028 },
+        "pension": { "startAge": 65, "startDate": "2039-02-03", "startMonth": "2039-03" },
+        "age65": { "date": "2039-02-03" },
+        "rowsOrder": ["checkupThisYear", "insuranceChange", "checkupNext", "age65"]
+      }
+    },
+    {
+      "id": "C2", "birth": "1963-05-10", "base": "2026-11-09",
+      "expect": {
+        "fullAge": 63,
+        "checkup": { "eligibleThisYear": false, "nextYear": 2027 },
+        "pension": { "startAge": 63, "startDate": "2026-05-10", "startMonth": "2026-06" },
+        "age65": { "date": "2028-05-10" },
+        "rowsOrder": ["insuranceChange", "checkupNext", "age65"],
+        "note": "연금은 이미 시작 시점이 지나 rows에서 제외. 1963 홀수년생은 짝수 해 비대상"
+      }
+    },
+    {
+      "id": "C3", "birth": "1966-12-25", "base": "2026-11-09",
+      "expect": {
+        "fullAge": 59,
+        "insurance": { "age": 60, "nextChange": "2027-06-25" },
+        "checkup": { "eligibleThisYear": true, "nextYear": 2028 },
+        "pension": { "startAge": 64, "startDate": "2030-12-25", "startMonth": "2031-01" },
+        "age65": { "date": "2031-12-25" },
+        "rowsOrder": ["checkupThisYear", "insuranceChange", "checkupNext", "pensionStart", "age65"],
+        "note": "연금 개시(64세)와 65세가 다른 해 — 두 행 모두 표시. 1966년생 59세: 생일 12/25 전이므로 만 59, 6/25 상령일 지나 보험나이 60"
+      }
+    },
+    {
+      "id": "C4", "birth": "1996-02-29", "base": "2026-11-09",
+      "expect": {
+        "fullAge": 30,
+        "insurance": { "age": 31, "nextChange": "2027-08-29" },
+        "checkup": { "eligibleThisYear": true, "nextYear": 2028 },
+        "pension": { "startAge": 65, "startDate": "2061-02-28", "startMonth": "2061-03" },
+        "age65": { "date": "2061-02-28" },
+        "note": "2061년은 평년 → 2/28 처리"
+      }
+    },
+    {
+      "id": "C5", "birth": "2026-11-09", "base": "2026-11-09",
+      "expect": {
+        "fullAge": 0, "daysToBirthday": 365,
+        "insurance": { "age": 0, "nextChange": "2027-05-09" },
+        "checkup": { "eligibleThisYear": false, "nextYear": 2046 },
+        "pension": { "startAge": 65, "startDate": "2091-11-09", "startMonth": "2091-12" },
+        "note": "20세 미만은 검진 비대상 — 첫 대상 연도는 20세가 되는 해 이후 홀짝 일치 연도(2046 짝수 ✓)"
+      }
+    }
+  ],
+  "checkupParity": [
+    { "birthYear": 1974, "year": 2026, "eligible": true },
+    { "birthYear": 1973, "year": 2026, "eligible": false },
+    { "birthYear": 1973, "year": 2027, "eligible": true },
+    { "birthYear": 2010, "year": 2026, "eligible": false, "note": "20세 미만" }
+  ],
+  "pensionStartAge": [
+    { "birthYear": 1952, "age": 60 },
+    { "birthYear": 1955, "age": 61 },
+    { "birthYear": 1959, "age": 62 },
+    { "birthYear": 1963, "age": 63 },
+    { "birthYear": 1966, "age": 64 },
+    { "birthYear": 1969, "age": 65 },
+    { "birthYear": 1974, "age": 65 },
+    { "birthYear": 1990, "age": 65 }
+  ]
+}

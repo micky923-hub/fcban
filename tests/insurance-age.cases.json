@@ -1,0 +1,21 @@
+{
+  "_meta": {
+    "function": "insuranceAge(birthISO, baseISO) -> { fullAge, insAge, nextChangeISO }",
+    "rule": "만 나이 계산 후 마지막 생일+6개월 <= 기준일 이면 +1. 월 더하기 후 말일 보정. 2/29 출생자는 평년에 2/28 생일 처리. 상령일 당일은 '이상'이므로 올림. 날짜는 'YYYY-MM-DD' 문자열 비교로만 처리(타임존 금지).",
+    "source": "스토리보드 v1.3 SB-04 (12 cases) — 모두 통과해야 완료"
+  },
+  "cases": [
+    { "id": 1, "birth": "1974-02-03", "base": "2026-11-09", "fullAge": 52, "insAge": 53, "nextChange": "2027-08-03", "note": "기본 — 6개월 경과" },
+    { "id": 2, "birth": "1974-02-03", "base": "2026-05-01", "fullAge": 52, "insAge": 52, "nextChange": "2026-08-03", "note": "6개월 미만" },
+    { "id": 3, "birth": "1974-02-03", "base": "2026-08-03", "fullAge": 52, "insAge": 53, "nextChange": "2027-08-03", "note": "상령일 당일 = 올림" },
+    { "id": 4, "birth": "1974-02-03", "base": "2026-08-02", "fullAge": 52, "insAge": 52, "nextChange": "2026-08-03", "note": "상령일 하루 전" },
+    { "id": 5, "birth": "1974-02-03", "base": "2027-02-02", "fullAge": 52, "insAge": 53, "nextChange": "2027-08-03", "note": "생일 하루 전(만 나이 유지)" },
+    { "id": 6, "birth": "1974-02-03", "base": "2027-02-03", "fullAge": 53, "insAge": 53, "nextChange": "2027-08-03", "note": "생일 당일" },
+    { "id": 7, "birth": "1980-08-31", "base": "2026-02-28", "fullAge": 45, "insAge": 46, "nextChange": "2027-02-28", "note": "말일 보정 — 8/31+6M = 2/28" },
+    { "id": 8, "birth": "1980-08-31", "base": "2026-02-27", "fullAge": 45, "insAge": 45, "nextChange": "2026-02-28", "note": "말일 보정 직전" },
+    { "id": 9, "birth": "1996-02-29", "base": "2026-08-29", "fullAge": 30, "insAge": 31, "nextChange": "2027-08-29", "note": "윤년 출생, 상령일 당일" },
+    { "id": 10, "birth": "1996-02-29", "base": "2026-02-28", "fullAge": 30, "insAge": 30, "nextChange": "2026-08-29", "note": "평년 생일 2/28 처리" },
+    { "id": 11, "birth": "2026-11-09", "base": "2026-11-09", "fullAge": 0, "insAge": 0, "nextChange": "2027-05-09", "note": "당일 출생" },
+    { "id": 12, "birth": "1960-01-15", "base": "2026-07-15", "fullAge": 66, "insAge": 67, "nextChange": "2027-07-15", "note": "상령일 당일(고령)" }
+  ]
+}

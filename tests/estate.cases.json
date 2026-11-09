@@ -1,0 +1,32 @@
+{
+  "_meta": {
+    "function": "estateEstimate(input, taxRules) -> { deductionTotal, taxableBase, bracket:{rate, progressiveDeduction}, calculatedTax, zeroTax:boolean }",
+    "rules": "data/taxRules.json (2026 현행). 간이 계산: 배우자공제는 최소 5억만 반영, 인적공제는 자녀 1인 5천만(미성년 가산 생략 가능 — 미성년은 19세까지 연 1천만 가산).",
+    "unit": "KRW",
+    "display": "화면에는 억·천만 단위 반올림 + 범위('약 2천만 ~ 3천만 원')로 표기하되, 테스트는 산출세액 정확값을 고정한다."
+  },
+  "inheritance": [
+    { "id": "I1", "asset": 500000000, "spouse": true, "children": 2, "minors": 0, "expect": { "deductionTotal": 1000000000, "taxableBase": 0, "zeroTax": true } },
+    { "id": "I2", "asset": 1000000000, "spouse": true, "children": 2, "minors": 0, "expect": { "deductionTotal": 1000000000, "taxableBase": 0, "zeroTax": true } },
+    { "id": "I3", "asset": 1200000000, "spouse": true, "children": 2, "minors": 0, "expect": { "deductionTotal": 1000000000, "taxableBase": 200000000, "rate": 0.20, "calculatedTax": 30000000 } },
+    { "id": "I4", "asset": 2000000000, "spouse": true, "children": 2, "minors": 0, "expect": { "deductionTotal": 1000000000, "taxableBase": 1000000000, "rate": 0.30, "calculatedTax": 240000000 } },
+    { "id": "I5", "asset": 3500000000, "spouse": true, "children": 2, "minors": 0, "expect": { "deductionTotal": 1000000000, "taxableBase": 2500000000, "rate": 0.40, "calculatedTax": 840000000 } },
+    { "id": "I6", "asset": 800000000, "spouse": false, "children": 2, "minors": 0, "expect": { "deductionTotal": 500000000, "taxableBase": 300000000, "rate": 0.20, "calculatedTax": 50000000 }, "note": "배우자 없음 → 일괄공제 5억만" },
+    { "id": "I7", "asset": 800000000, "spouse": false, "children": 0, "minors": 0, "expect": { "specialCase": "noChildNoSpouse" }, "note": "계산 생략, 안내 문구 카드(taxRules.inheritance.noChildNoSpouseText)" }
+  ],
+  "gift": [
+    { "id": "G1", "amount": 100000000, "relation": "linealDescendant_adult", "marriageBirth": false, "expect": { "deductionTotal": 50000000, "taxableBase": 50000000, "rate": 0.10, "calculatedTax": 5000000 } },
+    { "id": "G2", "amount": 700000000, "relation": "spouse", "marriageBirth": false, "expect": { "deductionTotal": 600000000, "taxableBase": 100000000, "rate": 0.10, "calculatedTax": 10000000 } },
+    { "id": "G3", "amount": 150000000, "relation": "linealDescendant_adult", "marriageBirth": true, "expect": { "deductionTotal": 150000000, "taxableBase": 0, "zeroTax": true }, "note": "5천만 + 혼인·출산 1억" },
+    { "id": "G4", "amount": 30000000, "relation": "linealDescendant_minor", "marriageBirth": false, "expect": { "deductionTotal": 20000000, "taxableBase": 10000000, "rate": 0.10, "calculatedTax": 1000000 } },
+    { "id": "G5", "amount": 20000000, "relation": "otherRelative", "marriageBirth": false, "expect": { "deductionTotal": 10000000, "taxableBase": 10000000, "rate": 0.10, "calculatedTax": 1000000 } }
+  ],
+  "bracketBoundary": [
+    { "taxableBase": 100000000, "rate": 0.10, "calculatedTax": 10000000, "note": "1억 이하 → 10%" },
+    { "taxableBase": 100000001, "rate": 0.20, "note": "1억 초과 → 20%" },
+    { "taxableBase": 500000000, "rate": 0.20, "calculatedTax": 90000000 },
+    { "taxableBase": 1000000000, "rate": 0.30, "calculatedTax": 240000000 },
+    { "taxableBase": 3000000000, "rate": 0.40, "calculatedTax": 1040000000 },
+    { "taxableBase": 3000000001, "rate": 0.50 }
+  ]
+}
