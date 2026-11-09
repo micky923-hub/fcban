@@ -10,6 +10,12 @@ export function isDraftSet(data, set) {
   return [...items, ...infos].some((x) => !x || !x.reviewedAt);
 }
 
+/** 데이터 전체 초안 여부(출처 카드 배지용): 확정 상태가 아니거나, 어느 세트든 확인일이 빈 항목·설명이 있으면 초안 */
+export function isDraftData(data) {
+  if (!data || data._meta?.status !== 'confirmed') return true;
+  return data.sets.some((s) => isDraftSet(data, s));
+}
+
 export const findSet = (data, ageGroup, sex) => data.sets.find((s) => s.ageGroup === ageGroup && s.sex === sex) || null;
 
 /**

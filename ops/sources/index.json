@@ -81,19 +81,19 @@
     {
       "id": "S-HLT-01",
       "topic": "health",
-      "title": "국민건강보험공단 — 건강검진 안내(일반건강검진 · 성·연령별 검사)",
+      "title": "국민건강보험공단 — 건강모아 · 일반건강검진 실시안내(검사항목 · 성·연령별 검사)",
       "publisher": "국민건강보험공단",
-      "url": "https://www.nhis.or.kr/",
-      "checkedAt": null,
+      "url": "https://www.nhis.or.kr/nhis/healthin/wbhaca04500m01.do",
+      "checkedAt": "2026-11-10",
       "path": null
     },
     {
       "id": "S-HLT-02",
       "topic": "health",
-      "title": "국립암센터 — 국가암검진 안내 · 암검진 권고안",
+      "title": "국립암센터 — 국가암관리사업 · 국가암검진사업",
       "publisher": "국립암센터",
-      "url": "https://www.ncc.re.kr/",
-      "checkedAt": null,
+      "url": "https://www.ncc.re.kr/main.ncc?uri=manage01_4",
+      "checkedAt": "2026-11-10",
       "path": null
     }
   ]

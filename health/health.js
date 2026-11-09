@@ -3,12 +3,12 @@
 // - 내 나이 달력에서 넘어온 경우 나이대 자동 선택(assets/handoff.js, 1회용 세션 메모리).
 import { copy, h, mountPage, disclaimer, otherToolsLink, shareButton, bottomSheet, sitePath, LABELS } from '../assets/ui.js';
 import data from '../assets/healthData.data.js';
-import { healthModel, isDraftSet } from '../assets/health.js';
+import { healthModel, isDraftData } from '../assets/health.js';
 import { takeAgeGroupHandoff } from '../assets/handoff.js';
 
 const C = copy.health;
 const main = mountPage(document.getElementById('app'), { title: C.title });
-const draftBadge = () => (isDraftSet(data, null) ? h('span', { class: 'badge badge--draft', text: LABELS.draft }) : null);
+const draftBadge = () => (isDraftData(data) ? h('span', { class: 'badge badge--draft', text: LABELS.draft }) : null);
 
 // ── 선택 화면 (SB-05) ─────────────────────────────────────────
 

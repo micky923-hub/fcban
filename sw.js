@@ -6,7 +6,7 @@
 // 고객 화면 파일(목록 또는 내용 — 데이터 포함)이 바뀌어 배포할 때마다 VERSION 을 올린다.
 // 올리지 않으면 이미 방문한 기기는 이전 파일을 먼저 보여 준다(OPEN_QUESTIONS Q53).
 // tests/offline.test.mjs 가 목록의 파일이 실제로 있는지 검사한다.
-const VERSION = 'fd-2026-11-09-13';
+const VERSION = 'fd-2026-11-10-2';
 const PRECACHE = [
   './',
   'calendar/',
