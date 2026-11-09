@@ -191,7 +191,9 @@ export function renderArticle(a, { copy, siteRoot = '../../', businessInfo = nul
   <meta property="og:description" content="${desc}">
   <meta name="theme-color" content="#0C2340">
   <meta name="format-detection" content="telephone=no">
-  <link rel="icon" href="data:,">
+  <link rel="icon" href="${siteRoot}favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="${siteRoot}assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="${siteRoot}assets/icons/apple-touch-icon.png">
   <link rel="stylesheet" href="${siteRoot}assets/base.css">
   <style>
     .nl-kicker { font-size: var(--fs-label); font-weight: 700; color: var(--c-accent); }
@@ -269,7 +271,9 @@ export function renderStatePage({ copy, siteRoot, title, sub = null, businessInf
   <title>${esc(title)} · ${esc(copy.brand.siteName)}</title>
   ${noindex ? '<meta name="robots" content="noindex">' : ''}
   <meta name="theme-color" content="#0C2340">
-  <link rel="icon" href="data:,">
+  <link rel="icon" href="${siteRoot}favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="${siteRoot}assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="${siteRoot}assets/icons/apple-touch-icon.png">
   <link rel="stylesheet" href="${siteRoot}assets/base.css">
 </head>
 <body>
