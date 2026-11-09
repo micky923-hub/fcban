@@ -36,20 +36,20 @@
 | 국가암검진 | `ca-stomach` | 위암 | 2년마다 | 위내시경 | `S-HLT-02` | 40세 이상. 위장조영검사 선택 가능 여부 표기 확인 | 40s/male, 40s/female, 50s/male, 50s/female, 60s/male, 60s/female, 70plus/male, 70plus/female | ☐ |
 | 국가암검진 | `ca-liver` | 간암 | 고위험군 6개월마다 | 간초음파 · 혈청알파태아단백 | `S-HLT-02` | 40세 이상 고위험군 | 40s/male, 40s/female, 50s/male, 50s/female, 60s/male, 60s/female, 70plus/male, 70plus/female | ☐ |
 | 흔히 챙기는 것 | `cm-hbv` | B형간염 검사 | 40세 | 혈액검사 | `S-HLT-01` | — | 40s/male, 40s/female | ☐ |
-| 흔히 챙기는 것 | `cm-mental` | 정신건강검사(우울증) | 40세 | 설문 | `S-HLT-01` | 2025년 청년 대상 주기 변경 여부 확인 | 40s/male, 40s/female | ☐ |
+| 흔히 챙기는 것 | `cm-mental` | 정신건강검사(우울증) | 40세 | 설문 | `S-HLT-01` | 10년 주기(20·30·40·50·60·70세) 현행 여부 확인 | 40s/male, 40s/female | ☐ |
 | 국가암검진 | `ca-breast` | 유방암 | 2년마다 | 유방촬영 | `S-HLT-02` | 여성 40세 이상 | 40s/female, 50s/female, 60s/female, 70plus/female | ☐ |
 | 국가암검진 | `ca-colon` | 대장암 | 1년마다 | 분변잠혈검사 | `S-HLT-02` | 50세 이상 | 50s/male, 50s/female, 60s/male, 60s/female, 70plus/male, 70plus/female | ☐ |
 | 국가암검진 | `ca-lung` | 폐암 | 54세부터 · 고위험군 2년마다 | 저선량 흉부CT | `S-HLT-02` | 54–74세 고위험군(흡연력 기준) — 연령 경계 표기 확인 | 50s/male, 50s/female | ☐ |
 | 흔히 챙기는 것 | `cm-lifestyle` | 생활습관평가 | 50세 | 설문 | `S-HLT-01` | — | 50s/male | ☐ |
-| 흔히 챙기는 것 | `cm-mental` | 정신건강검사(우울증) | 50세 | 설문 | `S-HLT-01` | 2025년 청년 대상 주기 변경 여부 확인 | 50s/male, 50s/female | ☐ |
+| 흔히 챙기는 것 | `cm-mental` | 정신건강검사(우울증) | 50세 | 설문 | `S-HLT-01` | 10년 주기(20·30·40·50·60·70세) 현행 여부 확인 | 50s/male, 50s/female | ☐ |
 | 흔히 챙기는 것 | `cm-bone` | 골밀도 검사 | 54세 | 골밀도 측정 | `S-HLT-01` | 여성 54·66세 — 2025년 대상 연령 추가 여부 확인 | 50s/female | ☐ |
 | 국가암검진 | `ca-lung` | 폐암 | 고위험군 2년마다 | 저선량 흉부CT | `S-HLT-02` | 54–74세 고위험군(흡연력 기준) — 연령 경계 표기 확인 | 60s/male, 60s/female | ☐ |
 | 흔히 챙기는 것 | `cm-cognitive` | 인지기능장애 검사 | 66세 이상 · 2년마다 | 설문 | `S-HLT-01` | — | 60s/male, 70plus/male, 70plus/female | ☐ |
-| 흔히 챙기는 것 | `cm-mental` | 정신건강검사(우울증) | 60세 | 설문 | `S-HLT-01` | 2025년 청년 대상 주기 변경 여부 확인 | 60s/male, 60s/female | ☐ |
+| 흔히 챙기는 것 | `cm-mental` | 정신건강검사(우울증) | 60세 | 설문 | `S-HLT-01` | 10년 주기(20·30·40·50·60·70세) 현행 여부 확인 | 60s/male, 60s/female | ☐ |
 | 흔히 챙기는 것 | `cm-bone` | 골밀도 검사 | 66세 | 골밀도 측정 | `S-HLT-01` | 여성 54·66세 — 2025년 대상 연령 추가 여부 확인 | 60s/female | ☐ |
 | 국가암검진 | `ca-lung` | 폐암 | 74세까지 · 고위험군 2년마다 | 저선량 흉부CT | `S-HLT-02` | 54–74세 고위험군(흡연력 기준) — 연령 경계 표기 확인 | 70plus/male, 70plus/female | ☐ |
 | 흔히 챙기는 것 | `cm-physical` | 노인신체기능검사 | 70세 · 80세 | 신체기능 측정 | `S-HLT-01` | — | 70plus/male, 70plus/female | ☐ |
-| 흔히 챙기는 것 | `cm-mental` | 정신건강검사(우울증) | 70세 | 설문 | `S-HLT-01` | 2025년 청년 대상 주기 변경 여부 확인 | 70plus/male, 70plus/female | ☐ |
+| 흔히 챙기는 것 | `cm-mental` | 정신건강검사(우울증) | 70세 | 설문 | `S-HLT-01` | 10년 주기(20·30·40·50·60·70세) 현행 여부 확인 | 70plus/male, 70plus/female | ☐ |
 
 ## 세트별 구성 (빠진 항목·성별 조건 확인)
 

@@ -466,7 +466,7 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "2025년 청년 대상 주기 변경 여부 확인"
+              "reviewNote": "10년 주기(20·30·40·50·60·70세) 현행 여부 확인"
             }
           ]
         }
@@ -583,7 +583,7 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "2025년 청년 대상 주기 변경 여부 확인"
+              "reviewNote": "10년 주기(20·30·40·50·60·70세) 현행 여부 확인"
             }
           ]
         }
@@ -701,7 +701,7 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "2025년 청년 대상 주기 변경 여부 확인"
+              "reviewNote": "10년 주기(20·30·40·50·60·70세) 현행 여부 확인"
             }
           ]
         }
@@ -838,7 +838,7 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "2025년 청년 대상 주기 변경 여부 확인"
+              "reviewNote": "10년 주기(20·30·40·50·60·70세) 현행 여부 확인"
             }
           ]
         }
@@ -947,7 +947,7 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "2025년 청년 대상 주기 변경 여부 확인"
+              "reviewNote": "10년 주기(20·30·40·50·60·70세) 현행 여부 확인"
             },
             {
               "id": "cm-lipid",
@@ -1084,7 +1084,7 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "2025년 청년 대상 주기 변경 여부 확인"
+              "reviewNote": "10년 주기(20·30·40·50·60·70세) 현행 여부 확인"
             },
             {
               "id": "cm-lipid",
@@ -1210,7 +1210,7 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "2025년 청년 대상 주기 변경 여부 확인"
+              "reviewNote": "10년 주기(20·30·40·50·60·70세) 현행 여부 확인"
             }
           ]
         }
@@ -1345,7 +1345,7 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "2025년 청년 대상 주기 변경 여부 확인"
+              "reviewNote": "10년 주기(20·30·40·50·60·70세) 현행 여부 확인"
             }
           ]
         }
