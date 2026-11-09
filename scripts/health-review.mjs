@@ -8,7 +8,7 @@ import { dirname, join } from 'node:path';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const data = JSON.parse(readFileSync(join(root, 'assets/healthData.json'), 'utf8'));
-const cell = (v) => (v === null || v === undefined || v === '' ? '—' : String(v).replace(/\|/g, '\\|'));
+const cell = (v) => (v === null || v === undefined || v === '' ? '—' : String(v).replace(/\|/g, '\\|').replace(/\n/g, '<br>')); // 칸 안 줄바꿈은 <br> — 표가 깨지지 않게
 const box = (v) => (v ? `☑ ${v}` : '☐');
 const SECTION = { general: '국가건강검진', cancer: '국가암검진', common: '흔히 챙기는 것' };
 const FP = { match: '✅ 일치', differs: '⚠️ 다름', notFound: '❔ 못 찾음' };
