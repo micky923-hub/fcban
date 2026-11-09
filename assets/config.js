@@ -2,10 +2,10 @@
 // 비어 있으면: 공유 버튼 비활성, 채널 추가 버튼 비활성. 개인정보·추적 관련 값은 두지 않는다.
 export default {
   /** 카카오 디벨로퍼스 JS 앱 키 */
-  KAKAO_JS_KEY: '',
+  KAKAO_JS_KEY: 'b11326de269efa371c153025b4d97891', // 공개용 JavaScript 키(도메인 제한: fcban.bluem-partners.com)
   /** 카카오 JS SDK 주소(정확한 버전 고정) + SRI 해시 — 키를 받으면 함께 채운다 */
   KAKAO_SDK_URL: 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js',
-  KAKAO_SDK_INTEGRITY: '',
+  KAKAO_SDK_INTEGRITY: 'sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4yyC7wy6K1Hs90nka',
   /** 카카오톡 채널 홈 (예: https://pf.kakao.com/_xxxxx) */
   KAKAO_CHANNEL_URL: '',
   /** 공용 사이트 주소(끝 / 포함). 비우면 현재 origin 을 쓴다 */
