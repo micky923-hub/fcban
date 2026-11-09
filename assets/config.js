@@ -7,7 +7,7 @@ export default {
   KAKAO_SDK_URL: 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js',
   KAKAO_SDK_INTEGRITY: 'sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4yyC7wy6K1Hs90nka',
   /** 카카오톡 채널 홈 (예: https://pf.kakao.com/_xxxxx) */
-  KAKAO_CHANNEL_URL: '',
+  KAKAO_CHANNEL_URL: 'https://pf.kakao.com/_VxdxkxeX', // 채널 '파이낸셜다이어리' (2026-11-09)
   /** 공용 사이트 주소(끝 / 포함). 비우면 현재 origin 을 쓴다 */
   SITE_URL: 'https://fcban.bluem-partners.com/', // 운영자 결정 2026-11-10 (SPEC §8-2) — 바꾸면 CNAME 도 같이
   /** 공유 고정 썸네일(절대 URL, 1200×600 권장). 비우면 텍스트형 공유 */
