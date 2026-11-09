@@ -4,10 +4,54 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT, readJSON } from './_load.mjs';
-import { hubModel, normalizeWeekly } from '../assets/hub.js';
+import { hubModel, normalizeWeekly, yearNumbers } from '../assets/hub.js';
 import { inlineWeekly } from '../scripts/inline-weekly.mjs';
 
 const copy = readJSON('data/copy.ko.json');
+const ageRules = readJSON('data/ageRules.json');
+const taxRules = readJSON('data/taxRules.json');
+const parityWords = { even: '짝수', odd: '홀수' };
+const ctx = { copy, ageRules, taxRules, parityWords };
+const byId = (cards) => Object.fromEntries(cards.map((c) => [c.id, c]));
+
+test('올해 알아둘 숫자 2026: 짝수년생 검진 · 1963년생 국민연금 63세 · 1961년생 65세 · 성인 자녀 5천만', () => {
+  const cards = yearNumbers(2026, ctx);
+  assert.deepEqual(cards.map((c) => c.id), ['checkup', 'pension', 'age65', 'gift']);
+  const c = byId(cards);
+  assert.equal(c.checkup.figure, '짝수년생');
+  assert.equal(c.checkup.sub, '2026년은 짝수 해에 태어난 분이 대상입니다 · 12.31까지');
+  assert.equal(c.pension.figure, '1963년생');
+  assert.equal(c.pension.sub, '63세 생일 다음 달부터 받습니다');
+  assert.equal(c.age65.figure, '1961년생');
+  assert.equal(c.gift.figure, '5천만 원');
+  assert.equal(c.gift.sub, '10년 합산 기준입니다 · 미성년 자녀는 2천만 원');
+});
+
+test('올해 알아둘 숫자: 홀수 해 · 국민연금 새 시작 출생연도가 없는 해는 카드 생략', () => {
+  assert.equal(byId(yearNumbers(2027, ctx)).checkup.figure, '홀수년생');
+  assert.equal(byId(yearNumbers(2027, ctx)).pension.figure, '1964년생'); // 1961–1964년생 63세
+  assert.equal(byId(yearNumbers(2028, ctx)).pension, undefined); // 1964+63=2027, 1965+64=2029
+  assert.equal(byId(yearNumbers(2029, ctx)).pension.figure, '1965년생');
+  assert.equal(byId(yearNumbers(2034, ctx)).pension.figure, '1969년생'); // 1969년생부터 65세
+});
+
+test('올해 알아둘 숫자: 카드마다 출처 ID와 도구 경로가 있고, 국민연금 카드가 있으면 조건 고지문', () => {
+  const m = hubModel(copy, null, { year: 2026, ...ctx, channelUrl: 'https://pf.kakao.com/_abc/' });
+  assert.equal(m.numbers.label, '2026년에 알아둘 숫자');
+  assert.ok(m.numbers.cards.every((c) => /^S-[A-Z]+-\d{2}$/.test(c.source) && /^(health|estate|calendar)\/$/.test(c.path)));
+  assert.equal(m.numbers.note, copy.disclaimer.pension);
+  assert.equal(hubModel(copy, null, { year: 2028, ...ctx }).numbers.note, null);
+});
+
+test('만든 사람: 바이라인·인사말, 채널 주소가 있을 때만 1:1 채팅 링크', () => {
+  const m = hubModel(copy, null, { year: 2026, ...ctx, channelUrl: 'https://pf.kakao.com/_abc/' });
+  assert.equal(m.operator.name, copy.brand.byline);
+  assert.equal(m.operator.text, copy.hub.operatorText);
+  assert.equal(m.operator.chat.url, 'https://pf.kakao.com/_abc/chat');
+  assert.equal(hubModel(copy, null, { year: 2026, ...ctx, channelUrl: '' }).operator.chat, null);
+  assert.equal(hubModel(copy, null).operator, null, '추가 정보 없이 부르면 예전 허브 그대로');
+  assert.equal(hubModel(copy, null).numbers, null);
+});
 const sample = { title: '제목', slug: 'week-01', donguiLine: '한 줄', readMin: 3, publishedAt: '2026-11-12', weekLabel: '11월 2주' };
 
 test('도구 카드 노출 순서: 건강 체크 → 상속·증여 → 내 나이 달력', () => {
