@@ -3,8 +3,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
-import { join, relative } from 'node:path';
-import { ROOT } from './_load.mjs';
+import { join } from 'node:path';
+import { ROOT, relPath } from './_load.mjs';
 
 const GENERATED = /\.data\.js$/;
 function* walk(dir) {
@@ -21,7 +21,7 @@ const strip = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/<!--[\s\S]*?-->
 const BANNED = [/\bfetch\s*\(/, /XMLHttpRequest/, /sendBeacon/, /localStorage/, /indexedDB/, /document\.cookie/, /<form[^>]+action=/i, /URLSearchParams/, /location\.search/, /new\s+WebSocket/, /gtag|googletagmanager|google-analytics/i];
 
 for (const f of files) {
-  const rel = relative(ROOT, f);
+  const rel = relPath(f);
   test(`${rel}: 서버 전송·저장·추적 코드 없음`, () => {
     const src = strip(readFileSync(f, 'utf8'));
     for (const bad of BANNED) assert.ok(!bad.test(src), `${bad}`);

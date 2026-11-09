@@ -3,8 +3,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
-import { join, relative } from 'node:path';
-import { ROOT, readJSON } from './_load.mjs';
+import { join } from 'node:path';
+import { ROOT, readJSON, relPath } from './_load.mjs';
 
 const dict = readJSON('data/forbidden-words.json');
 const copy = readJSON('data/copy.ko.json');
@@ -36,7 +36,7 @@ const ROOT_FILES = ['index.html', 'index.js'].map((f) => join(ROOT, f)).filter(e
 
 test('직접 작성한 코드·화면에 1군 단어가 없다', () => {
   for (const f of [...ROOT_FILES, ...DIRS.flatMap((d) => [...walk(join(ROOT, d))])]) {
-    const rel = relative(ROOT, f);
+    const rel = relPath(f);
     if (SKIP.has(rel)) continue;
     assert.deepEqual(tier1Hits(readFileSync(f, 'utf8')), [], rel);
   }
