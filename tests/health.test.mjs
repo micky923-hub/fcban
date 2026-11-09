@@ -119,3 +119,16 @@ test('출처 대조표가 모든 세트·항목을 담고 있다', () => {
   for (const s of data.sets) assert.ok(md.includes(`${s.ageGroup} / ${s.sex}`), `${s.ageGroup}/${s.sex}`);
   for (const id of new Set(allItems.map((i) => i.id))) assert.ok(md.includes(`\`${id}\``), id);
 });
+
+test('1차 대조(firstPass)는 확정이 아니다: 형식 검사, reviewedAt·초안 배지는 그대로', () => {
+  const ok = new Set(['match', 'differs', 'notFound']);
+  for (const i of allItems) {
+    assert.ok(i.firstPass && ok.has(i.firstPass.status), `${i.id} firstPass`);
+    assert.match(i.firstPass.checkedAt, /^\d{4}-\d{2}-\d{2}$/);
+    if (i.firstPass.status === 'differs') assert.ok(i.firstPass.proposal, `${i.id} 다름이면 바꿀 제안 필요`);
+  }
+  for (const v of Object.values(data.info)) assert.ok(v.firstPass && ok.has(v.firstPass.status));
+  assert.equal(data._meta.status, 'draft', '1차 대조만으로 확정하지 않는다');
+  assert.equal(isDraftSet(data, findSet(data, '50s', 'male')), true);
+  for (const m of data._meta.firstPass.missingFromDraft) assert.ok(m.sourceId in data.sources, m.name);
+});

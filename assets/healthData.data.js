@@ -6,20 +6,59 @@ export default {
     "status": "draft",
     "updatedAt": "2026-11-09",
     "rule": "초안. 운영자가 docs/healthData-review.md 로 출처와 대조해 항목별 reviewedAt(YYYY-MM-DD)을 채우고 status 를 confirmed 로 바꾸기 전에는 화면에 '초안' 배지를 표시하고 배포하지 않는다. 수치 기준·위험도·판정 문구는 넣지 않는다.",
-    "note": "초안 작성자는 출처 원문을 직접 열람하지 않았다. 모든 항목·주기·연령은 대조 대상이다."
+    "note": "초안 작성자는 출처 원문을 직접 열람하지 않았다. 모든 항목·주기·연령은 대조 대상이다.",
+    "firstPass": {
+      "checkedAt": "2026-11-09",
+      "by": "Claude Code (1차 대조 — 확정 아님)",
+      "method": "두 기관 공식 페이지를 WebFetch 로 읽어 항목별로 비교. 인용문은 페이지 요약 도구를 거쳤으므로 운영자가 원문 페이지에서 한 번 더 확인한다.",
+      "missingFromDraft": [
+        {
+          "name": "조기정신증 검사",
+          "where": "20대·30대",
+          "cycle": "20~34세 · 2년마다",
+          "sourceId": "S-HLT-01"
+        },
+        {
+          "name": "치면세균막검사",
+          "where": "40대",
+          "cycle": "40세",
+          "sourceId": "S-HLT-01"
+        },
+        {
+          "name": "C형간염 검사",
+          "where": "50대",
+          "cycle": "56세",
+          "sourceId": "S-HLT-01"
+        },
+        {
+          "name": "폐기능검사",
+          "where": "50대·60대",
+          "cycle": "56세 · 66세",
+          "sourceId": "S-HLT-01"
+        },
+        {
+          "name": "생활습관평가",
+          "where": "60대",
+          "cycle": "60세",
+          "sourceId": "S-HLT-01"
+        }
+      ]
+    }
   },
   "sources": {
     "S-HLT-01": {
-      "title": "국민건강보험공단 — 건강검진 안내(일반건강검진 · 성·연령별 검사)",
+      "title": "국민건강보험공단 — 건강모아 · 일반건강검진 실시안내(검사항목 · 성·연령별 검사)",
       "publisher": "국민건강보험공단",
-      "url": "https://www.nhis.or.kr/",
-      "checkedAt": null
+      "url": "https://www.nhis.or.kr/nhis/healthin/wbhaca04500m01.do",
+      "checkedAt": null,
+      "firstPassAt": "2026-11-09"
     },
     "S-HLT-02": {
-      "title": "국립암센터 — 국가암검진 안내 · 암검진 권고안",
+      "title": "국립암센터 — 국가암관리사업 · 국가암검진사업",
       "publisher": "국립암센터",
-      "url": "https://www.ncc.re.kr/",
-      "checkedAt": null
+      "url": "https://www.ncc.re.kr/main.ncc?uri=manage01_4",
+      "checkedAt": null,
+      "firstPassAt": "2026-11-09"
     }
   },
   "ageGroups": [
@@ -80,14 +119,28 @@ export default {
       "text": "간경변증, B형간염 바이러스 표면항원 양성, C형간염 바이러스 항체 양성, B형 또는 C형 간염 바이러스에 의한 만성 간질환이 있는 경우입니다.",
       "sourceId": "S-HLT-02",
       "verbatim": false,
-      "reviewedAt": null
+      "reviewedAt": null,
+      "firstPass": {
+        "status": "differs",
+        "checkedAt": "2026-11-09",
+        "quote": "40세 이상 남녀 간암발생고위험군 (간경변증이나 B형 간염 바이러스 항원 또는 C형 간염바이러스 항체 양성으로 확인된 자)",
+        "note": "초안에 원문에 없는 \"만성 간질환\" 표현이 들어 있음",
+        "proposal": "괄호 안 원문으로 교체 후 verbatim: true"
+      }
     },
     "lungHighRisk": {
       "title": "폐암 고위험군",
       "text": "54세부터 74세까지 중 30갑년 이상의 흡연력이 있는 현재 흡연자 등 흡연력 기준에 해당하는 경우입니다.",
       "sourceId": "S-HLT-02",
       "verbatim": false,
-      "reviewedAt": null
+      "reviewedAt": null,
+      "firstPass": {
+        "status": "differs",
+        "checkedAt": "2026-11-09",
+        "quote": "54세 이상 74세 이하의 남·여 中 폐암 발생 고위험군 · 30갑년 [하루 평균 담배소비량(갑)x흡연기간(년)] 이상의 흡연력을 가진 흡연자",
+        "note": "초안은 \"현재 흡연자 등\"으로 줄여 씀. 금연 15년 이내 과거 수검자 포함 여부는 이 페이지에 없음(다른 안내 자료에는 있음)",
+        "proposal": "원문으로 교체 후 verbatim: true"
+      }
     }
   },
   "sets": [
@@ -104,7 +157,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 신체계측(신장·체중·허리둘레·비만도), 시력·청력검사, 혈압측정",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-blood",
@@ -113,7 +171,11 @@ export default {
               "test": null,
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "혈액검사 항목 묶음 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 혈색소, 공복혈당, AST·ALT·γ-GTP(간 기능), 혈청크레아티닌·e-GFR(신장 기능)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-xray",
@@ -121,7 +183,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 흉부방사선 검사, 요검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-oral",
@@ -129,7 +196,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 구강검진 — 주기·검사도구는 \"고시 확정 후 추가 예정\"",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -147,7 +219,11 @@ export default {
               "test": "혈액검사(콜레스테롤 등)",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "남성 24세 이상 · 여성 40세 이상, 4년 주기 — 현행 기준 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 남성 24세 이상·여성 40세 이상 · 4년마다(남 24·28·32…, 여 40·44·48…)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-mental",
@@ -156,7 +232,12 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "2025년 청년 대상 주기 변경 여부 확인"
+              "firstPass": {
+                "status": "differs",
+                "note": "원문: 20~34세는 2년마다(20·22·24…34세)",
+                "proposal": "주기를 \"20세부터 · 2년마다\"로",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         }
@@ -175,7 +256,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 신체계측(신장·체중·허리둘레·비만도), 시력·청력검사, 혈압측정",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-blood",
@@ -184,7 +270,11 @@ export default {
               "test": null,
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "혈액검사 항목 묶음 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 혈색소, 공복혈당, AST·ALT·γ-GTP(간 기능), 혈청크레아티닌·e-GFR(신장 기능)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-xray",
@@ -192,7 +282,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 흉부방사선 검사, 요검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-oral",
@@ -200,7 +295,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 구강검진 — 주기·검사도구는 \"고시 확정 후 추가 예정\"",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -214,7 +314,11 @@ export default {
               "test": "자궁경부세포검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "여성 20세 이상"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 20세 이상 여성 · 2년 · 자궁경부세포검사",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -228,7 +332,12 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "2025년 청년 대상 주기 변경 여부 확인"
+              "firstPass": {
+                "status": "differs",
+                "note": "원문: 20~34세는 2년마다(20·22·24…34세)",
+                "proposal": "주기를 \"20세부터 · 2년마다\"로",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         }
@@ -247,7 +356,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 신체계측(신장·체중·허리둘레·비만도), 시력·청력검사, 혈압측정",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-blood",
@@ -256,7 +370,11 @@ export default {
               "test": null,
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "혈액검사 항목 묶음 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 혈색소, 공복혈당, AST·ALT·γ-GTP(간 기능), 혈청크레아티닌·e-GFR(신장 기능)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-xray",
@@ -264,7 +382,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 흉부방사선 검사, 요검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-oral",
@@ -272,7 +395,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 구강검진 — 주기·검사도구는 \"고시 확정 후 추가 예정\"",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -290,7 +418,11 @@ export default {
               "test": "혈액검사(콜레스테롤 등)",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "남성 24세 이상 · 여성 40세 이상, 4년 주기 — 현행 기준 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 남성 24세 이상·여성 40세 이상 · 4년마다(남 24·28·32…, 여 40·44·48…)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-mental",
@@ -299,7 +431,12 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "2025년 청년 대상 주기 변경 여부 확인"
+              "firstPass": {
+                "status": "differs",
+                "note": "원문: 20~34세는 2년마다(…30·32·34세), 35~39세는 1회",
+                "proposal": "주기를 \"34세까지 2년마다 · 35~39세 중 1회\"로",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         }
@@ -318,7 +455,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 신체계측(신장·체중·허리둘레·비만도), 시력·청력검사, 혈압측정",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-blood",
@@ -327,7 +469,11 @@ export default {
               "test": null,
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "혈액검사 항목 묶음 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 혈색소, 공복혈당, AST·ALT·γ-GTP(간 기능), 혈청크레아티닌·e-GFR(신장 기능)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-xray",
@@ -335,7 +481,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 흉부방사선 검사, 요검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-oral",
@@ -343,7 +494,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 구강검진 — 주기·검사도구는 \"고시 확정 후 추가 예정\"",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -357,7 +513,11 @@ export default {
               "test": "자궁경부세포검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "여성 20세 이상"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 20세 이상 여성 · 2년 · 자궁경부세포검사",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -371,7 +531,12 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "2025년 청년 대상 주기 변경 여부 확인"
+              "firstPass": {
+                "status": "differs",
+                "note": "원문: 20~34세는 2년마다(…30·32·34세), 35~39세는 1회",
+                "proposal": "주기를 \"34세까지 2년마다 · 35~39세 중 1회\"로",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         }
@@ -390,7 +555,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 신체계측(신장·체중·허리둘레·비만도), 시력·청력검사, 혈압측정",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-blood",
@@ -399,7 +569,11 @@ export default {
               "test": null,
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "혈액검사 항목 묶음 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 혈색소, 공복혈당, AST·ALT·γ-GTP(간 기능), 혈청크레아티닌·e-GFR(신장 기능)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-xray",
@@ -407,7 +581,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 흉부방사선 검사, 요검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-oral",
@@ -415,7 +594,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 구강검진 — 주기·검사도구는 \"고시 확정 후 추가 예정\"",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -429,7 +613,11 @@ export default {
               "test": "위내시경",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "40세 이상. 위장조영검사 선택 가능 여부 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 남녀 · 2년 · 위내시경검사 (위장조영검사는 이 페이지에 없음)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-liver",
@@ -439,7 +627,11 @@ export default {
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "infoId": "liverHighRisk",
-              "reviewNote": "40세 이상 고위험군"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 남녀 간암발생고위험군 · 6개월 · 간초음파검사 + 혈청알파태아단백검사",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -453,7 +645,11 @@ export default {
               "test": "혈액검사(콜레스테롤 등)",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "남성 24세 이상 · 여성 40세 이상, 4년 주기 — 현행 기준 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 남성 24세 이상·여성 40세 이상 · 4년마다(남 24·28·32…, 여 40·44·48…)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-hbv",
@@ -461,7 +657,12 @@ export default {
               "cycle": "40세",
               "test": "혈액검사",
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 · \"보균자 또는 면역자 제외\"",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-mental",
@@ -470,7 +671,12 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "10년 주기(20·30·40·50·60·70세) 현행 여부 확인"
+              "firstPass": {
+                "status": "differs",
+                "note": "원문: 40~49세 중 1회",
+                "proposal": "주기를 \"40~49세 중 1회\"로",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-lifestyle",
@@ -478,7 +684,12 @@ export default {
               "cycle": "40세",
               "test": "설문",
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40·50·60·70세",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         }
@@ -497,7 +708,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 신체계측(신장·체중·허리둘레·비만도), 시력·청력검사, 혈압측정",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-blood",
@@ -506,7 +722,11 @@ export default {
               "test": null,
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "혈액검사 항목 묶음 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 혈색소, 공복혈당, AST·ALT·γ-GTP(간 기능), 혈청크레아티닌·e-GFR(신장 기능)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-xray",
@@ -514,7 +734,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 흉부방사선 검사, 요검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-oral",
@@ -522,7 +747,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 구강검진 — 주기·검사도구는 \"고시 확정 후 추가 예정\"",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -536,7 +766,11 @@ export default {
               "test": "위내시경",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "40세 이상. 위장조영검사 선택 가능 여부 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 남녀 · 2년 · 위내시경검사 (위장조영검사는 이 페이지에 없음)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-liver",
@@ -546,7 +780,11 @@ export default {
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "infoId": "liverHighRisk",
-              "reviewNote": "40세 이상 고위험군"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 남녀 간암발생고위험군 · 6개월 · 간초음파검사 + 혈청알파태아단백검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-breast",
@@ -555,7 +793,11 @@ export default {
               "test": "유방촬영",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "여성 40세 이상"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 여성 · 2년 · 유방촬영술",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-cervix",
@@ -564,7 +806,11 @@ export default {
               "test": "자궁경부세포검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "여성 20세 이상"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 20세 이상 여성 · 2년 · 자궁경부세포검사",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -578,7 +824,11 @@ export default {
               "test": "혈액검사(콜레스테롤 등)",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "남성 24세 이상 · 여성 40세 이상, 4년 주기 — 현행 기준 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 남성 24세 이상·여성 40세 이상 · 4년마다(남 24·28·32…, 여 40·44·48…)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-hbv",
@@ -586,7 +836,12 @@ export default {
               "cycle": "40세",
               "test": "혈액검사",
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 · \"보균자 또는 면역자 제외\"",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-mental",
@@ -595,7 +850,12 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "10년 주기(20·30·40·50·60·70세) 현행 여부 확인"
+              "firstPass": {
+                "status": "differs",
+                "note": "원문: 40~49세 중 1회",
+                "proposal": "주기를 \"40~49세 중 1회\"로",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-lifestyle",
@@ -603,7 +863,12 @@ export default {
               "cycle": "40세",
               "test": "설문",
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40·50·60·70세",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         }
@@ -622,7 +887,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 신체계측(신장·체중·허리둘레·비만도), 시력·청력검사, 혈압측정",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-blood",
@@ -631,7 +901,11 @@ export default {
               "test": null,
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "혈액검사 항목 묶음 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 혈색소, 공복혈당, AST·ALT·γ-GTP(간 기능), 혈청크레아티닌·e-GFR(신장 기능)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-xray",
@@ -639,7 +913,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 흉부방사선 검사, 요검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-oral",
@@ -647,7 +926,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 구강검진 — 주기·검사도구는 \"고시 확정 후 추가 예정\"",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -661,7 +945,11 @@ export default {
               "test": "위내시경",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "40세 이상. 위장조영검사 선택 가능 여부 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 남녀 · 2년 · 위내시경검사 (위장조영검사는 이 페이지에 없음)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-colon",
@@ -670,7 +958,11 @@ export default {
               "test": "분변잠혈검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "50세 이상"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 50세 이상 남녀 · 1년 · 분변잠혈검사(이상소견 시 대장내시경검사)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-liver",
@@ -680,7 +972,11 @@ export default {
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "infoId": "liverHighRisk",
-              "reviewNote": "40세 이상 고위험군"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 남녀 간암발생고위험군 · 6개월 · 간초음파검사 + 혈청알파태아단백검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-lung",
@@ -690,7 +986,11 @@ export default {
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "infoId": "lungHighRisk",
-              "reviewNote": "54–74세 고위험군(흡연력 기준) — 연령 경계 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 54세 이상 74세 이하 남·여 중 고위험군 · 2년 · 저선량흉부 CT",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -704,7 +1004,11 @@ export default {
               "test": "혈액검사(콜레스테롤 등)",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "남성 24세 이상 · 여성 40세 이상, 4년 주기 — 현행 기준 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 남성 24세 이상·여성 40세 이상 · 4년마다(남 24·28·32…, 여 40·44·48…)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-lifestyle",
@@ -712,7 +1016,12 @@ export default {
               "cycle": "50세",
               "test": "설문",
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40·50·60·70세",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-mental",
@@ -721,7 +1030,12 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "10년 주기(20·30·40·50·60·70세) 현행 여부 확인"
+              "firstPass": {
+                "status": "differs",
+                "note": "원문: 50~59세 중 1회",
+                "proposal": "주기를 \"50~59세 중 1회\"로",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         }
@@ -740,7 +1054,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 신체계측(신장·체중·허리둘레·비만도), 시력·청력검사, 혈압측정",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-blood",
@@ -749,7 +1068,11 @@ export default {
               "test": null,
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "혈액검사 항목 묶음 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 혈색소, 공복혈당, AST·ALT·γ-GTP(간 기능), 혈청크레아티닌·e-GFR(신장 기능)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-xray",
@@ -757,7 +1080,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 흉부방사선 검사, 요검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-oral",
@@ -765,7 +1093,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 구강검진 — 주기·검사도구는 \"고시 확정 후 추가 예정\"",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -779,7 +1112,11 @@ export default {
               "test": "위내시경",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "40세 이상. 위장조영검사 선택 가능 여부 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 남녀 · 2년 · 위내시경검사 (위장조영검사는 이 페이지에 없음)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-colon",
@@ -788,7 +1125,11 @@ export default {
               "test": "분변잠혈검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "50세 이상"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 50세 이상 남녀 · 1년 · 분변잠혈검사(이상소견 시 대장내시경검사)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-liver",
@@ -798,7 +1139,11 @@ export default {
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "infoId": "liverHighRisk",
-              "reviewNote": "40세 이상 고위험군"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 남녀 간암발생고위험군 · 6개월 · 간초음파검사 + 혈청알파태아단백검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-breast",
@@ -807,7 +1152,11 @@ export default {
               "test": "유방촬영",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "여성 40세 이상"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 여성 · 2년 · 유방촬영술",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-cervix",
@@ -816,7 +1165,11 @@ export default {
               "test": "자궁경부세포검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "여성 20세 이상"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 20세 이상 여성 · 2년 · 자궁경부세포검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-lung",
@@ -826,7 +1179,11 @@ export default {
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "infoId": "lungHighRisk",
-              "reviewNote": "54–74세 고위험군(흡연력 기준) — 연령 경계 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 54세 이상 74세 이하 남·여 중 고위험군 · 2년 · 저선량흉부 CT",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -840,7 +1197,11 @@ export default {
               "test": "골밀도 측정",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "여성 54·66세 — 2025년 대상 연령 추가 여부 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 여성 54·60·66세",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-lipid",
@@ -849,7 +1210,11 @@ export default {
               "test": "혈액검사(콜레스테롤 등)",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "남성 24세 이상 · 여성 40세 이상, 4년 주기 — 현행 기준 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 남성 24세 이상·여성 40세 이상 · 4년마다(남 24·28·32…, 여 40·44·48…)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-lifestyle",
@@ -857,7 +1222,12 @@ export default {
               "cycle": "50세",
               "test": "설문",
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40·50·60·70세",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-mental",
@@ -866,7 +1236,12 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "10년 주기(20·30·40·50·60·70세) 현행 여부 확인"
+              "firstPass": {
+                "status": "differs",
+                "note": "원문: 50~59세 중 1회",
+                "proposal": "주기를 \"50~59세 중 1회\"로",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         }
@@ -885,7 +1260,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 신체계측(신장·체중·허리둘레·비만도), 시력·청력검사, 혈압측정",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-blood",
@@ -894,7 +1274,11 @@ export default {
               "test": null,
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "혈액검사 항목 묶음 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 혈색소, 공복혈당, AST·ALT·γ-GTP(간 기능), 혈청크레아티닌·e-GFR(신장 기능)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-xray",
@@ -902,7 +1286,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 흉부방사선 검사, 요검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-oral",
@@ -910,7 +1299,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 구강검진 — 주기·검사도구는 \"고시 확정 후 추가 예정\"",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -924,7 +1318,11 @@ export default {
               "test": "위내시경",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "40세 이상. 위장조영검사 선택 가능 여부 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 남녀 · 2년 · 위내시경검사 (위장조영검사는 이 페이지에 없음)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-colon",
@@ -933,7 +1331,11 @@ export default {
               "test": "분변잠혈검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "50세 이상"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 50세 이상 남녀 · 1년 · 분변잠혈검사(이상소견 시 대장내시경검사)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-liver",
@@ -943,7 +1345,11 @@ export default {
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "infoId": "liverHighRisk",
-              "reviewNote": "40세 이상 고위험군"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 남녀 간암발생고위험군 · 6개월 · 간초음파검사 + 혈청알파태아단백검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-lung",
@@ -953,7 +1359,11 @@ export default {
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "infoId": "lungHighRisk",
-              "reviewNote": "54–74세 고위험군(흡연력 기준) — 연령 경계 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 54세 이상 74세 이하 남·여 중 고위험군 · 2년 · 저선량흉부 CT",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -966,7 +1376,12 @@ export default {
               "cycle": "66세 이상 · 2년마다",
               "test": "설문",
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 66세 이상 · 2년마다(66·68·70…세)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-physical",
@@ -974,7 +1389,12 @@ export default {
               "cycle": "66세",
               "test": "신체기능 측정",
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 66·70·80세",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-mental",
@@ -983,7 +1403,12 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "10년 주기(20·30·40·50·60·70세) 현행 여부 확인"
+              "firstPass": {
+                "status": "differs",
+                "note": "원문: 60~69세 중 1회",
+                "proposal": "주기를 \"60~69세 중 1회\"로",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-lipid",
@@ -992,7 +1417,11 @@ export default {
               "test": "혈액검사(콜레스테롤 등)",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "남성 24세 이상 · 여성 40세 이상, 4년 주기 — 현행 기준 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 남성 24세 이상·여성 40세 이상 · 4년마다(남 24·28·32…, 여 40·44·48…)",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         }
@@ -1011,7 +1440,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 신체계측(신장·체중·허리둘레·비만도), 시력·청력검사, 혈압측정",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-blood",
@@ -1020,7 +1454,11 @@ export default {
               "test": null,
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "혈액검사 항목 묶음 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 혈색소, 공복혈당, AST·ALT·γ-GTP(간 기능), 혈청크레아티닌·e-GFR(신장 기능)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-xray",
@@ -1028,7 +1466,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 흉부방사선 검사, 요검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-oral",
@@ -1036,7 +1479,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 구강검진 — 주기·검사도구는 \"고시 확정 후 추가 예정\"",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -1050,7 +1498,11 @@ export default {
               "test": "위내시경",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "40세 이상. 위장조영검사 선택 가능 여부 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 남녀 · 2년 · 위내시경검사 (위장조영검사는 이 페이지에 없음)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-colon",
@@ -1059,7 +1511,11 @@ export default {
               "test": "분변잠혈검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "50세 이상"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 50세 이상 남녀 · 1년 · 분변잠혈검사(이상소견 시 대장내시경검사)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-liver",
@@ -1069,7 +1525,11 @@ export default {
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "infoId": "liverHighRisk",
-              "reviewNote": "40세 이상 고위험군"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 남녀 간암발생고위험군 · 6개월 · 간초음파검사 + 혈청알파태아단백검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-breast",
@@ -1078,7 +1538,11 @@ export default {
               "test": "유방촬영",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "여성 40세 이상"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 여성 · 2년 · 유방촬영술",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-cervix",
@@ -1087,7 +1551,11 @@ export default {
               "test": "자궁경부세포검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "여성 20세 이상"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 20세 이상 여성 · 2년 · 자궁경부세포검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-lung",
@@ -1097,7 +1565,11 @@ export default {
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "infoId": "lungHighRisk",
-              "reviewNote": "54–74세 고위험군(흡연력 기준) — 연령 경계 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 54세 이상 74세 이하 남·여 중 고위험군 · 2년 · 저선량흉부 CT",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -1111,7 +1583,12 @@ export default {
               "test": "골밀도 측정",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "여성 54·66세 — 2025년 대상 연령 추가 여부 확인"
+              "firstPass": {
+                "status": "differs",
+                "note": "원문: 여성 54·60·66세 — 60세가 빠져 있음",
+                "proposal": "60대 여성 주기를 \"60세 · 66세\"로",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-cognitive",
@@ -1119,7 +1596,12 @@ export default {
               "cycle": "66세 이상 · 2년마다",
               "test": "설문",
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 66세 이상 · 2년마다(66·68·70…세)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-physical",
@@ -1127,7 +1609,12 @@ export default {
               "cycle": "66세",
               "test": "신체기능 측정",
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 66·70·80세",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-mental",
@@ -1136,7 +1623,12 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "10년 주기(20·30·40·50·60·70세) 현행 여부 확인"
+              "firstPass": {
+                "status": "differs",
+                "note": "원문: 60~69세 중 1회",
+                "proposal": "주기를 \"60~69세 중 1회\"로",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-lipid",
@@ -1145,7 +1637,11 @@ export default {
               "test": "혈액검사(콜레스테롤 등)",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "남성 24세 이상 · 여성 40세 이상, 4년 주기 — 현행 기준 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 남성 24세 이상·여성 40세 이상 · 4년마다(남 24·28·32…, 여 40·44·48…)",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         }
@@ -1164,7 +1660,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 신체계측(신장·체중·허리둘레·비만도), 시력·청력검사, 혈압측정",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-blood",
@@ -1173,7 +1674,11 @@ export default {
               "test": null,
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "혈액검사 항목 묶음 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 혈색소, 공복혈당, AST·ALT·γ-GTP(간 기능), 혈청크레아티닌·e-GFR(신장 기능)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-xray",
@@ -1181,7 +1686,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 흉부방사선 검사, 요검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-oral",
@@ -1189,7 +1699,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 구강검진 — 주기·검사도구는 \"고시 확정 후 추가 예정\"",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -1203,7 +1718,11 @@ export default {
               "test": "위내시경",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "40세 이상. 위장조영검사 선택 가능 여부 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 남녀 · 2년 · 위내시경검사 (위장조영검사는 이 페이지에 없음)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-colon",
@@ -1212,7 +1731,11 @@ export default {
               "test": "분변잠혈검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "50세 이상"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 50세 이상 남녀 · 1년 · 분변잠혈검사(이상소견 시 대장내시경검사)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-liver",
@@ -1222,7 +1745,11 @@ export default {
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "infoId": "liverHighRisk",
-              "reviewNote": "40세 이상 고위험군"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 남녀 간암발생고위험군 · 6개월 · 간초음파검사 + 혈청알파태아단백검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-lung",
@@ -1232,7 +1759,11 @@ export default {
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "infoId": "lungHighRisk",
-              "reviewNote": "54–74세 고위험군(흡연력 기준) — 연령 경계 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 54세 이상 74세 이하 남·여 중 고위험군 · 2년 · 저선량흉부 CT",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -1245,7 +1776,12 @@ export default {
               "cycle": "66세 이상 · 2년마다",
               "test": "설문",
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 66세 이상 · 2년마다(66·68·70…세)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-physical",
@@ -1253,7 +1789,12 @@ export default {
               "cycle": "70세 · 80세",
               "test": "신체기능 측정",
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 66·70·80세",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-mental",
@@ -1262,7 +1803,12 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "10년 주기(20·30·40·50·60·70세) 현행 여부 확인"
+              "firstPass": {
+                "status": "differs",
+                "note": "원문: 70~79세 중 1회",
+                "proposal": "주기를 \"70~79세 중 1회\"로",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-lipid",
@@ -1271,7 +1817,11 @@ export default {
               "test": "혈액검사(콜레스테롤 등)",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "남성 24세 이상 · 여성 40세 이상, 4년 주기 — 현행 기준 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 남성 24세 이상·여성 40세 이상 · 4년마다(남 24·28·32…, 여 40·44·48…)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-lifestyle",
@@ -1279,7 +1829,12 @@ export default {
               "cycle": "70세",
               "test": "설문",
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40·50·60·70세",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         }
@@ -1298,7 +1853,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 신체계측(신장·체중·허리둘레·비만도), 시력·청력검사, 혈압측정",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-blood",
@@ -1307,7 +1867,11 @@ export default {
               "test": null,
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "혈액검사 항목 묶음 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 혈색소, 공복혈당, AST·ALT·γ-GTP(간 기능), 혈청크레아티닌·e-GFR(신장 기능)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-xray",
@@ -1315,7 +1879,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 흉부방사선 검사, 요검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "gen-oral",
@@ -1323,7 +1892,12 @@ export default {
               "cycle": null,
               "test": null,
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 구강검진 — 주기·검사도구는 \"고시 확정 후 추가 예정\"",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -1337,7 +1911,11 @@ export default {
               "test": "위내시경",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "40세 이상. 위장조영검사 선택 가능 여부 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 남녀 · 2년 · 위내시경검사 (위장조영검사는 이 페이지에 없음)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-colon",
@@ -1346,7 +1924,11 @@ export default {
               "test": "분변잠혈검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "50세 이상"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 50세 이상 남녀 · 1년 · 분변잠혈검사(이상소견 시 대장내시경검사)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-liver",
@@ -1356,7 +1938,11 @@ export default {
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "infoId": "liverHighRisk",
-              "reviewNote": "40세 이상 고위험군"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 남녀 간암발생고위험군 · 6개월 · 간초음파검사 + 혈청알파태아단백검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-breast",
@@ -1365,7 +1951,11 @@ export default {
               "test": "유방촬영",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "여성 40세 이상"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 이상 여성 · 2년 · 유방촬영술",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-cervix",
@@ -1374,7 +1964,11 @@ export default {
               "test": "자궁경부세포검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
-              "reviewNote": "여성 20세 이상"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 20세 이상 여성 · 2년 · 자궁경부세포검사",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "ca-lung",
@@ -1384,7 +1978,11 @@ export default {
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "infoId": "lungHighRisk",
-              "reviewNote": "54–74세 고위험군(흡연력 기준) — 연령 경계 표기 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 54세 이상 74세 이하 남·여 중 고위험군 · 2년 · 저선량흉부 CT",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         },
@@ -1397,7 +1995,12 @@ export default {
               "cycle": "66세 이상 · 2년마다",
               "test": "설문",
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 66세 이상 · 2년마다(66·68·70…세)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-physical",
@@ -1405,7 +2008,12 @@ export default {
               "cycle": "70세 · 80세",
               "test": "신체기능 측정",
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 66·70·80세",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-mental",
@@ -1414,7 +2022,12 @@ export default {
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "10년 주기(20·30·40·50·60·70세) 현행 여부 확인"
+              "firstPass": {
+                "status": "differs",
+                "note": "원문: 70~79세 중 1회",
+                "proposal": "주기를 \"70~79세 중 1회\"로",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-lipid",
@@ -1423,7 +2036,11 @@ export default {
               "test": "혈액검사(콜레스테롤 등)",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
-              "reviewNote": "남성 24세 이상 · 여성 40세 이상, 4년 주기 — 현행 기준 확인"
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 남성 24세 이상·여성 40세 이상 · 4년마다(남 24·28·32…, 여 40·44·48…)",
+                "checkedAt": "2026-11-09"
+              }
             },
             {
               "id": "cm-lifestyle",
@@ -1431,7 +2048,12 @@ export default {
               "cycle": "70세",
               "test": "설문",
               "sourceId": "S-HLT-01",
-              "reviewedAt": null
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40·50·60·70세",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         }
