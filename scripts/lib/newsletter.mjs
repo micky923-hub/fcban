@@ -254,3 +254,45 @@ export function pickWeekly(articles, todayISO) {
   if (!a) return null;
   return { title: a.meta.title, slug: a.meta.slug, donguiLine: a.donguiLine, readMin: a.readMin, publishedAt: a.meta.publishedAt, weekLabel: a.weekLabel, summary: a.summary.map(plain) };
 }
+
+/**
+ * 상태 페이지(SB-13): 404 · 내려간 글. 정적 HTML, 스크립트 없음, 허브로 가는 버튼 1개(검색창 없음).
+ * @param {object} o
+ * @param {string} o.siteRoot  자산·허브 경로 기준('../../' 또는 404 용 절대 경로 '/…/')
+ */
+export function renderStatePage({ copy, siteRoot, title, sub = null, businessInfo = null, noindex = true }) {
+  return `<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>${esc(title)} · ${esc(copy.brand.siteName)}</title>
+  ${noindex ? '<meta name="robots" content="noindex">' : ''}
+  <meta name="theme-color" content="#0C2340">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="${siteRoot}assets/base.css">
+</head>
+<body>
+  <div class="page">
+    <header class="site-header"><a class="site-header__link" href="${siteRoot}"><span class="site-header__back" aria-hidden="true">←</span> ${esc(copy.brand.siteName)}</a></header>
+    <main class="content" id="main">
+      <div>
+        <h1 class="page-title">${esc(title)}</h1>
+        ${sub ? `<p class="page-sub">${esc(sub)}</p>` : ''}
+      </div>
+      <a class="btn btn--primary btn--block" href="${siteRoot}">${esc(copy.states.notFoundCta)}</a>
+    </main>
+    <footer class="site-footer">
+      <p>${esc(copy.brand.footer)}</p>
+      <div class="site-footer__links"><a href="${esc(copy.brand.footerLink.url)}" target="_blank" rel="noopener">${esc(copy.brand.footerLink.label)}</a>${businessInfo && businessInfo.url ? `<a href="${esc(businessInfo.url)}" target="_blank" rel="noopener">${esc(businessInfo.label)}</a>` : ''}</div>
+    </footer>
+  </div>
+</body>
+</html>
+`;
+}
+
+/** front matter 만 빠르게 읽기 (내려간 글 판별용) */
+export function frontMatter(md) {
+  return parseArticle(md).meta;
+}

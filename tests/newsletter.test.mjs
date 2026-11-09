@@ -157,7 +157,7 @@ test('build: 슬롯 위반·검사 block·slug 중복이면 실패, 승인 전·
   dir = sandbox({ 'a.md': SAMPLE.replace('approvedBy: 테스트\n', ''), 'b.md': SAMPLE.replace('slug: fixture-sample', 'slug: later').replace('publishedAt: 2026-11-12', 'publishedAt: 2026-12-03') });
   const s = build({ root: dir, contentDir: join(dir, 'content'), today: '2026-11-12', filter: pass });
   assert.equal(s.ok, true);
-  assert.equal(s.pages.length, 0);
+  assert.deepEqual(s.pages.map((p) => p.path), ['404.html'], '글 페이지 없음(404 만)');
   assert.equal(s.weekly, null);
   assert.match(s.log.join('\n'), /승인 전/);
   assert.match(s.log.join('\n'), /발행일/);

@@ -8,7 +8,7 @@
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, join } from 'node:path';
-import { validateArticle, renderArticle, pickWeekly } from './lib/newsletter.mjs';
+import { validateArticle, renderArticle, pickWeekly, renderStatePage, frontMatter } from './lib/newsletter.mjs';
 import { inlineWeekly } from './inline-weekly.mjs';
 import { config, LABELS } from '../assets/ui.js';
 
@@ -42,8 +42,19 @@ export function build({ root = ROOT, contentDir = join(ROOT, 'content'), today, 
   const files = existsSync(contentDir) ? readdirSync(contentDir).filter((f) => f.endsWith('.md') && !f.startsWith('_')).sort() : [];
   const articles = [];
   const slugs = new Map();
+  const unpublished = [];
   for (const f of files) {
     const md = readFileSync(join(contentDir, f), 'utf8');
+    // 내려간 글: 같은 주소에 '이 글은 내려갔습니다' + 허브 버튼만 남긴다(SB-13). 본문·weekly 에서 뺀다.
+    const fm = frontMatter(md);
+    if (fm.unpublished === 'true') {
+      if (!fm.slug || !new RegExp(rules.slugPattern).test(fm.slug)) { errors.push(`${f}: 내려간 글의 slug 형식`); continue; }
+      if (slugs.has(fm.slug)) { errors.push(`${f}: slug 중복 (${slugs.get(fm.slug)})`); continue; }
+      slugs.set(fm.slug, f);
+      unpublished.push(fm.slug);
+      log.push(`${f}: 내려간 글`);
+      continue;
+    }
     const v = validateArticle(md, { rules, copy });
     if (!v.ok) { v.errors.forEach((e) => errors.push(`${f}: ${e}`)); continue; }
     if (filter) {
@@ -62,7 +73,13 @@ export function build({ root = ROOT, contentDir = join(ROOT, 'content'), today, 
   if (errors.length) return { ok: false, errors, log, pages: [], weekly: null };
 
   const weekly = pickWeekly(articles, today);
-  const pages = articles.map((a) => ({ path: join('diary', a.meta.slug, 'index.html'), html: renderArticle(a, { copy, businessInfo: { url: config.BUSINESS_INFO_URL, label: LABELS.businessInfo } }) }));
+  const businessInfo = { url: config.BUSINESS_INFO_URL, label: LABELS.businessInfo };
+  const pages = articles.map((a) => ({ path: join('diary', a.meta.slug, 'index.html'), html: renderArticle(a, { copy, businessInfo }) }));
+  for (const slug of unpublished) {
+    pages.push({ path: join('diary', slug, 'index.html'), html: renderStatePage({ copy, siteRoot: '../../', title: copy.states.unpublished, businessInfo }) });
+  }
+  // 404.html 은 어느 경로에서든 열리므로 사이트 기준 절대 경로를 쓴다(SITE_URL 의 경로, 없으면 '/')
+  pages.push({ path: '404.html', html: renderStatePage({ copy, siteRoot: siteBasePath(), title: copy.states.notFoundTitle, sub: copy.states.notFoundSub, businessInfo }) });
   if (write) {
     for (const p of pages) {
       mkdirSync(dirname(join(root, p.path)), { recursive: true });
@@ -74,6 +91,12 @@ export function build({ root = ROOT, contentDir = join(ROOT, 'content'), today, 
     writeFileSync(indexPath, inlineWeekly(readFileSync(indexPath, 'utf8'), weekly));
   }
   return { ok: true, errors, log, pages, weekly };
+}
+
+/** 배포 기준 경로: assets/config.js SITE_URL 의 pathname (예: GitHub Pages 프로젝트 사이트 '/financial-diary/') */
+export function siteBasePath(siteUrl = config.SITE_URL) {
+  if (!siteUrl) return '/';
+  try { const p = new URL(siteUrl).pathname; return p.endsWith('/') ? p : `${p}/`; } catch { return '/'; }
 }
 
 function localToday() {

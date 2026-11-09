@@ -80,13 +80,23 @@ const submit = h('button', { type: 'submit', class: 'btn btn--primary btn--block
 const touched = new Set();
 
 /** 필수값이 다 맞을 때만 버튼 활성(SB-07 ④). 오류 문구는 손댄 칸에만 */
+/** 필수값이 다 채워졌는지(SB-07 ④: 미입력이면 버튼 비활성) — 값이 틀린 것은 여기서 보지 않는다 */
+function requiredFilled() {
+  if (state.tab === 'inheritance') {
+    return [inh.amount, inh.children, inh.minors].every((f) => f.input.value.trim() !== '') && inh.spouse.value() !== null;
+  }
+  return gift.amount.input.value.trim() !== '' && gift.relation.value() !== null;
+}
+
+const currentFields = () => (state.tab === 'inheritance' ? [inh.amount, inh.children, inh.minors] : [gift.amount]);
+
+/** 오류 문구는 손댄 칸에만. 값이 틀려도 버튼은 활성 유지(SB-13: 재시도 유도) */
 function sync() {
-  const { errors, input } = readForm();
-  const fields = state.tab === 'inheritance' ? [inh.amount, inh.children, inh.minors] : [gift.amount];
-  for (const f of fields) setFieldError(f.input, f.error, touched.has(f) && f.input.value !== '' ? errors.get(f) : null);
+  const { errors } = readForm();
+  for (const f of currentFields()) setFieldError(f.input, f.error, touched.has(f) && f.input.value !== '' ? errors.get(f) : null);
   const rel = gift.relation.value();
   marriageRow.hidden = !(rel && rel.startsWith('linealDescendant'));
-  submit.disabled = !input;
+  submit.disabled = !requiredFilled();
 }
 for (const f of [inh.amount, inh.children, inh.minors, gift.amount]) {
   f.input.addEventListener('input', sync);
@@ -214,8 +224,15 @@ function renderResult(input, r) {
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  const { input } = readForm();
-  if (!input) return;
+  const { input, errors } = readForm();
+  if (!input) {
+    // 필드 아래 빨간 한 줄 + 첫 오류 칸으로 이동 (모달·알림창 없음)
+    const fields = currentFields();
+    fields.forEach((f) => { touched.add(f); setFieldError(f.input, f.error, errors.get(f) || null); });
+    const first = fields.find((f) => errors.has(f));
+    if (first) first.input.focus();
+    return;
+  }
   const r = estateEstimate(input, rules);
   resultView.replaceChildren(...renderResult(input, r));
   inputView.hidden = true;

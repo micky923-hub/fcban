@@ -206,6 +206,9 @@ button, input { font: inherit; color: inherit; }
 }
 .sheet__title { font-size: 18px; font-weight: 700; }
 
+/* 오프라인 안내 줄 (SB-13) */
+.offline-banner { padding: var(--sp-3) var(--sp-4); border: 1px solid var(--c-line); border-radius: var(--radius); background: var(--c-bg-soft); font-size: 14px; color: var(--c-ink); }
+
 /* 스켈레톤(로딩 표시 — 스피너 금지) */
 .skeleton { background: var(--c-bg-soft); border-radius: var(--radius); }
 

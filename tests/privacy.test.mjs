@@ -15,7 +15,7 @@ function* walk(dir) {
     else if (/\.(m?js|html)$/.test(name) && !GENERATED.test(name)) yield p;
   }
 }
-const files = [join(ROOT, 'index.js'), join(ROOT, 'index.html'), ...['assets', 'calendar', 'health', 'estate', 'diary'].flatMap((d) => [...walk(join(ROOT, d))])].filter(existsSync);
+const files = [join(ROOT, 'index.js'), join(ROOT, 'index.html'), join(ROOT, '404.html'), ...['assets', 'calendar', 'health', 'estate', 'diary'].flatMap((d) => [...walk(join(ROOT, d))])].filter(existsSync);
 const strip = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/<!--[\s\S]*?-->/g, '').replace(/^\s*\/\/.*$/gm, '').replace(/\s\/\/ .*$/gm, '');
 
 const BANNED = [/\bfetch\s*\(/, /XMLHttpRequest/, /sendBeacon/, /localStorage/, /indexedDB/, /document\.cookie/, /<form[^>]+action=/i, /URLSearchParams/, /location\.search/, /new\s+WebSocket/, /gtag|googletagmanager|google-analytics/i];
@@ -28,3 +28,8 @@ for (const f of files) {
     if (rel !== 'assets/handoff.js') assert.ok(!/sessionStorage/.test(src), 'sessionStorage 는 handoff.js 에서만');
   });
 }
+
+test('sw.js: 정적 파일 캐시만 — 저장소·쿠키·외부 전송 없음', () => {
+  const src = strip(readFileSync(join(ROOT, 'sw.js'), 'utf8'));
+  for (const bad of [/localStorage/, /sessionStorage/, /indexedDB/, /document\.cookie/, /sendBeacon/, /XMLHttpRequest/, /method:\s*['"]POST/i]) assert.ok(!bad.test(src), String(bad));
+});

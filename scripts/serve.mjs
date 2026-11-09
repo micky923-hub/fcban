@@ -20,6 +20,8 @@ createServer(async (req, res) => {
     const body = await readFile(file);
     res.writeHead(200, { 'content-type': types[extname(file)] || 'application/octet-stream', 'cache-control': 'no-store' }).end(body);
   } catch {
-    res.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' }).end('404');
+    // GitHub Pages 처럼 없는 주소에는 404.html 을 돌려준다
+    const page = await readFile(join(root, '404.html')).catch(() => '404');
+    res.writeHead(404, { 'content-type': 'text/html; charset=utf-8' }).end(page);
   }
 }).listen(port, '127.0.0.1', () => console.log(`http://127.0.0.1:${port}/`));

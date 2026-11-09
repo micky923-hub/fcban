@@ -193,8 +193,30 @@ export function bottomSheet({ id, title, body, closeLabel = LABELS.close }) {
 }
 
 /** 페이지 골격: 헤더 + main + 푸터 */
+/** 오프라인 안내 줄 (SB-13) — 계산기는 오프라인에서도 그대로 동작한다 */
+export function offlineBanner() {
+  const el = h('p', { class: 'offline-banner', role: 'status', text: copy.states.offline });
+  const sync = () => { el.hidden = navigator.onLine !== false; };
+  sync();
+  window.addEventListener('online', sync);
+  window.addEventListener('offline', sync);
+  return el;
+}
+
+/**
+ * 서비스워커 등록(SB-13 오프라인). 사이트 루트의 sw.js — 정적 파일만 캐시하고 입력값은 다루지 않는다.
+ * https 또는 localhost 에서만 동작한다.
+ */
+export function registerServiceWorker() {
+  if (!('serviceWorker' in navigator) || !window.isSecureContext) return;
+  navigator.serviceWorker.register(new URL('sw.js', SITE_ROOT), { scope: SITE_ROOT.pathname }).catch(() => { /* 오프라인 캐시만 생략 */ });
+}
+
+/** 페이지 골격: 헤더 + (오프라인 안내) + main + 푸터 */
 export function mountPage(root, { title }) {
   const main = h('main', { class: 'content', id: 'main' });
+  main.append(offlineBanner());
   root.replaceChildren(header({ title }), main, footer());
+  registerServiceWorker();
   return main;
 }
