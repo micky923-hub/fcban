@@ -626,14 +626,13 @@ export default {
               "id": "ca-stomach",
               "name": "위암",
               "cycle": "2년마다",
-              "test": "위내시경",
+              "test": "위내시경 또는 위장조영검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
+                "status": "match",
                 "checkedAt": "2026-11-09",
-                "note": "원문 HTML: \"위내시경검사 또는 위장조영검사 중 원하는 한 가지 방법으로 선택하여 받으실 수 있습니다\" — 1차 대조 때 \"위장조영검사는 페이지에 없음\"이라 한 것은 오판",
-                "proposal": "검사를 \"위내시경 또는 위장조영검사\"로"
+                "note": "원문 HTML: \"위내시경검사 또는 위장조영검사 중 원하는 한 가지 방법으로 선택\" — 제안 반영(이전 표기: 위내시경)"
               }
             },
             {
@@ -792,14 +791,13 @@ export default {
               "id": "ca-stomach",
               "name": "위암",
               "cycle": "2년마다",
-              "test": "위내시경",
+              "test": "위내시경 또는 위장조영검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
+                "status": "match",
                 "checkedAt": "2026-11-09",
-                "note": "원문 HTML: \"위내시경검사 또는 위장조영검사 중 원하는 한 가지 방법으로 선택하여 받으실 수 있습니다\" — 1차 대조 때 \"위장조영검사는 페이지에 없음\"이라 한 것은 오판",
-                "proposal": "검사를 \"위내시경 또는 위장조영검사\"로"
+                "note": "원문 HTML: \"위내시경검사 또는 위장조영검사 중 원하는 한 가지 방법으로 선택\" — 제안 반영(이전 표기: 위내시경)"
               }
             },
             {
@@ -984,14 +982,13 @@ export default {
               "id": "ca-stomach",
               "name": "위암",
               "cycle": "2년마다",
-              "test": "위내시경",
+              "test": "위내시경 또는 위장조영검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
+                "status": "match",
                 "checkedAt": "2026-11-09",
-                "note": "원문 HTML: \"위내시경검사 또는 위장조영검사 중 원하는 한 가지 방법으로 선택하여 받으실 수 있습니다\" — 1차 대조 때 \"위장조영검사는 페이지에 없음\"이라 한 것은 오판",
-                "proposal": "검사를 \"위내시경 또는 위장조영검사\"로"
+                "note": "원문 HTML: \"위내시경검사 또는 위장조영검사 중 원하는 한 가지 방법으로 선택\" — 제안 반영(이전 표기: 위내시경)"
               }
             },
             {
@@ -1177,14 +1174,13 @@ export default {
               "id": "ca-stomach",
               "name": "위암",
               "cycle": "2년마다",
-              "test": "위내시경",
+              "test": "위내시경 또는 위장조영검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
+                "status": "match",
                 "checkedAt": "2026-11-09",
-                "note": "원문 HTML: \"위내시경검사 또는 위장조영검사 중 원하는 한 가지 방법으로 선택하여 받으실 수 있습니다\" — 1차 대조 때 \"위장조영검사는 페이지에 없음\"이라 한 것은 오판",
-                "proposal": "검사를 \"위내시경 또는 위장조영검사\"로"
+                "note": "원문 HTML: \"위내시경검사 또는 위장조영검사 중 원하는 한 가지 방법으로 선택\" — 제안 반영(이전 표기: 위내시경)"
               }
             },
             {
@@ -1409,14 +1405,13 @@ export default {
               "id": "ca-stomach",
               "name": "위암",
               "cycle": "2년마다",
-              "test": "위내시경",
+              "test": "위내시경 또는 위장조영검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
+                "status": "match",
                 "checkedAt": "2026-11-09",
-                "note": "원문 HTML: \"위내시경검사 또는 위장조영검사 중 원하는 한 가지 방법으로 선택하여 받으실 수 있습니다\" — 1차 대조 때 \"위장조영검사는 페이지에 없음\"이라 한 것은 오판",
-                "proposal": "검사를 \"위내시경 또는 위장조영검사\"로"
+                "note": "원문 HTML: \"위내시경검사 또는 위장조영검사 중 원하는 한 가지 방법으로 선택\" — 제안 반영(이전 표기: 위내시경)"
               }
             },
             {
@@ -1615,14 +1610,13 @@ export default {
               "id": "ca-stomach",
               "name": "위암",
               "cycle": "2년마다",
-              "test": "위내시경",
+              "test": "위내시경 또는 위장조영검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
+                "status": "match",
                 "checkedAt": "2026-11-09",
-                "note": "원문 HTML: \"위내시경검사 또는 위장조영검사 중 원하는 한 가지 방법으로 선택하여 받으실 수 있습니다\" — 1차 대조 때 \"위장조영검사는 페이지에 없음\"이라 한 것은 오판",
-                "proposal": "검사를 \"위내시경 또는 위장조영검사\"로"
+                "note": "원문 HTML: \"위내시경검사 또는 위장조영검사 중 원하는 한 가지 방법으로 선택\" — 제안 반영(이전 표기: 위내시경)"
               }
             },
             {
@@ -1860,14 +1854,13 @@ export default {
               "id": "ca-stomach",
               "name": "위암",
               "cycle": "2년마다",
-              "test": "위내시경",
+              "test": "위내시경 또는 위장조영검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
+                "status": "match",
                 "checkedAt": "2026-11-09",
-                "note": "원문 HTML: \"위내시경검사 또는 위장조영검사 중 원하는 한 가지 방법으로 선택하여 받으실 수 있습니다\" — 1차 대조 때 \"위장조영검사는 페이지에 없음\"이라 한 것은 오판",
-                "proposal": "검사를 \"위내시경 또는 위장조영검사\"로"
+                "note": "원문 HTML: \"위내시경검사 또는 위장조영검사 중 원하는 한 가지 방법으로 선택\" — 제안 반영(이전 표기: 위내시경)"
               }
             },
             {
@@ -2053,14 +2046,13 @@ export default {
               "id": "ca-stomach",
               "name": "위암",
               "cycle": "2년마다",
-              "test": "위내시경",
+              "test": "위내시경 또는 위장조영검사",
               "sourceId": "S-HLT-02",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
+                "status": "match",
                 "checkedAt": "2026-11-09",
-                "note": "원문 HTML: \"위내시경검사 또는 위장조영검사 중 원하는 한 가지 방법으로 선택하여 받으실 수 있습니다\" — 1차 대조 때 \"위장조영검사는 페이지에 없음\"이라 한 것은 오판",
-                "proposal": "검사를 \"위내시경 또는 위장조영검사\"로"
+                "note": "원문 HTML: \"위내시경검사 또는 위장조영검사 중 원하는 한 가지 방법으로 선택\" — 제안 반영(이전 표기: 위내시경)"
               }
             },
             {
