@@ -71,8 +71,8 @@ export default {
     }
   ],
   "limits": {
-    "commonMax": 4,
-    "rule": "'이 나이대에 흔히 챙기는 것' 최대 항목 수(운영자 결정 2026-11-09: 3 → 4)"
+    "commonMax": 5,
+    "rule": "'이 나이대에 흔히 챙기는 것' 최대 항목 수(운영자 결정 2026-11-09: 3 → 4 → 5)"
   },
   "info": {
     "liverHighRisk": {
@@ -1122,6 +1122,14 @@ export default {
               "reviewedAt": null
             },
             {
+              "id": "cm-physical",
+              "name": "노인신체기능검사",
+              "cycle": "66세",
+              "test": "신체기능 측정",
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null
+            },
+            {
               "id": "cm-mental",
               "name": "정신건강검사(우울증)",
               "cycle": "60세",
@@ -1236,6 +1244,14 @@ export default {
               "name": "인지기능장애 검사",
               "cycle": "66세 이상 · 2년마다",
               "test": "설문",
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null
+            },
+            {
+              "id": "cm-physical",
+              "name": "노인신체기능검사",
+              "cycle": "70세 · 80세",
+              "test": "신체기능 측정",
               "sourceId": "S-HLT-01",
               "reviewedAt": null
             },
@@ -1380,6 +1396,14 @@ export default {
               "name": "인지기능장애 검사",
               "cycle": "66세 이상 · 2년마다",
               "test": "설문",
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null
+            },
+            {
+              "id": "cm-physical",
+              "name": "노인신체기능검사",
+              "cycle": "70세 · 80세",
+              "test": "신체기능 측정",
               "sourceId": "S-HLT-01",
               "reviewedAt": null
             },
