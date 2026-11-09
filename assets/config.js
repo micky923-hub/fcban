@@ -11,7 +11,7 @@ export default {
   /** 공용 사이트 주소(끝 / 포함). 비우면 현재 origin 을 쓴다 */
   SITE_URL: 'https://fcban.bluem-partners.com/', // 운영자 결정 2026-11-10 (SPEC §8-2) — 바꾸면 CNAME 도 같이
   /** 공유 고정 썸네일(절대 URL, 1200×600 권장). 비우면 텍스트형 공유 */
-  SHARE_THUMB_URL: '',
+  SHARE_THUMB_URL: 'https://fcban.bluem-partners.com/assets/share/kakao-share-1200x600.png', // 문구: copy.brand.siteName + copy.hub.sub 앞부분
   /** 사업자 정보 페이지 */
   BUSINESS_INFO_URL: 'https://bluem-partners.com/',
 };
