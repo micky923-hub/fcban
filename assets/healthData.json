@@ -1080,6 +1080,15 @@
           "id": "common",
           "items": [
             {
+              "id": "cm-bone",
+              "name": "골밀도 검사",
+              "cycle": "66세",
+              "test": "골밀도 측정",
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null,
+              "reviewNote": "여성 54·66세 — 2025년 대상 연령 추가 여부 확인"
+            },
+            {
               "id": "cm-cognitive",
               "name": "인지기능장애 검사",
               "cycle": "66세 이상 · 2년마다",
