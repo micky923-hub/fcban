@@ -941,14 +941,6 @@ export default {
               "reviewedAt": null
             },
             {
-              "id": "cm-physical",
-              "name": "노인신체기능검사",
-              "cycle": "66세",
-              "test": "신체기능 측정",
-              "sourceId": "S-HLT-01",
-              "reviewedAt": null
-            },
-            {
               "id": "cm-mental",
               "name": "정신건강검사(우울증)",
               "cycle": "60세",
@@ -956,6 +948,15 @@ export default {
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "reviewNote": "2025년 청년 대상 주기 변경 여부 확인"
+            },
+            {
+              "id": "cm-lipid",
+              "name": "이상지질혈증 검사",
+              "cycle": "4년마다",
+              "test": "혈액검사(콜레스테롤 등)",
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null,
+              "reviewNote": "남성 24세 이상 · 여성 40세 이상, 4년 주기 — 현행 기준 확인"
             }
           ]
         }
@@ -1077,14 +1078,6 @@ export default {
               "reviewNote": "여성 54·66세 — 2025년 대상 연령 추가 여부 확인"
             },
             {
-              "id": "cm-cognitive",
-              "name": "인지기능장애 검사",
-              "cycle": "66세 이상 · 2년마다",
-              "test": "설문",
-              "sourceId": "S-HLT-01",
-              "reviewedAt": null
-            },
-            {
               "id": "cm-mental",
               "name": "정신건강검사(우울증)",
               "cycle": "60세",
@@ -1092,6 +1085,15 @@ export default {
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "reviewNote": "2025년 청년 대상 주기 변경 여부 확인"
+            },
+            {
+              "id": "cm-lipid",
+              "name": "이상지질혈증 검사",
+              "cycle": "4년마다",
+              "test": "혈액검사(콜레스테롤 등)",
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null,
+              "reviewNote": "남성 24세 이상 · 여성 40세 이상, 4년 주기 — 현행 기준 확인"
             }
           ]
         }
