@@ -3,8 +3,10 @@
 // - 다른 출처(카카오 SDK 등)는 건드리지 않는다 → 오프라인이면 공유 버튼만 비활성.
 // - 화면(HTML)은 네트워크 우선 → 실패하면 캐시 → 그래도 없으면 404.html.
 // - 정적 파일은 캐시 우선 + 뒤에서 새로 받기(stale-while-revalidate).
-// 파일 목록이 바뀌면 VERSION 을 올린다(tests/offline.test.mjs 가 목록의 파일이 실제로 있는지 검사).
-const VERSION = 'fd-2026-11-09-1';
+// 고객 화면 파일(목록 또는 내용 — 데이터 포함)이 바뀌어 배포할 때마다 VERSION 을 올린다.
+// 올리지 않으면 이미 방문한 기기는 이전 파일을 먼저 보여 준다(OPEN_QUESTIONS Q53).
+// tests/offline.test.mjs 가 목록의 파일이 실제로 있는지 검사한다.
+const VERSION = 'fd-2026-11-09-2';
 const PRECACHE = [
   './',
   'calendar/',

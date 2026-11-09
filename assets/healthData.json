@@ -69,6 +69,10 @@
       "label": "여성"
     }
   ],
+  "limits": {
+    "commonMax": 4,
+    "rule": "'이 나이대에 흔히 챙기는 것' 최대 항목 수(운영자 결정 2026-11-09: 3 → 4)"
+  },
   "info": {
     "liverHighRisk": {
       "title": "간암 고위험군",
@@ -812,6 +816,15 @@
         {
           "id": "common",
           "items": [
+            {
+              "id": "cm-bone",
+              "name": "골밀도 검사",
+              "cycle": "54세",
+              "test": "골밀도 측정",
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null,
+              "reviewNote": "여성 54·66세 — 2025년 대상 연령 추가 여부 확인"
+            },
             {
               "id": "cm-lipid",
               "name": "이상지질혈증 검사",

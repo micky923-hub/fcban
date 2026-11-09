@@ -39,7 +39,7 @@ export function healthModel(data, copy, ageGroup, sex) {
     },
     common: {
       title: titles[2],
-      items: byId.common.slice(0, 3).map((i) => [i.name, i.cycle].filter(Boolean).join(' · ')),
+      items: byId.common.slice(0, data.limits.commonMax).map((i) => [i.name, i.cycle].filter(Boolean).join(' · ')),
     },
   };
 }

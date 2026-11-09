@@ -135,7 +135,7 @@ ageCalendar(birthISO, baseISO, rules) -> { fullAge, nextBirthday, daysToBirthday
 - 출처 카드 고정(`copy.health.sourceText`).
 
 ### SB-06 내 나이 건강 체크 — 결과 (PNG: sb-12)
-- `assets/healthData.json` 12세트(6×2)에서 조회. 섹션 3개 고정: 국가건강검진(2년마다) → 국가암검진(암종·주기·검사명, 성별 조건 반영) → 이 나이대에 흔히 챙기는 것(최대 3개, 권유형 어미 금지).
+- `assets/healthData.json` 12세트(6×2)에서 조회. 섹션 3개 고정: 국가건강검진(2년마다) → 국가암검진(암종·주기·검사명, 성별 조건 반영) → 이 나이대에 흔히 챙기는 것(최대 4개 — 2026-11-09 운영자 결정으로 3→4, 값은 `healthData.json` `limits.commonMax`. 권유형 어미 금지).
 - 수치 기준·위험도·판정 문구 금지(의료 자문 아님). "고위험군" 정의는 ⓘ 바텀시트에 출처 원문 그대로.
 - 공유 + "내 나이 달력" 교차 링크.
 - healthData.json에는 각 항목 `sourceId`와 `reviewedAt` 필수. **초안은 Claude Code가 만들고 운영자가 출처와 대조 후 확정**(확정 전 배포 금지).

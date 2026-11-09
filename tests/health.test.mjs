@@ -27,10 +27,11 @@ test('칩 라벨이 확정 카피와 같은 순서·같은 글자', () => {
   assert.deepEqual(data.sexes.map((s) => s.label), copy.health.sexOptions);
 });
 
-test('섹션 3개 고정 순서: 국가건강검진 → 국가암검진 → 흔히 챙기는 것(최대 3)', () => {
+test('섹션 3개 고정 순서: 국가건강검진 → 국가암검진 → 흔히 챙기는 것(최대 limits.commonMax)', () => {
+  assert.equal(data.limits.commonMax, 4, '운영자 결정 2026-11-09');
   for (const s of data.sets) {
     assert.deepEqual(s.sections.map((x) => x.id), ['general', 'cancer', 'common']);
-    assert.ok(s.sections[2].items.length <= 3, `${s.ageGroup}/${s.sex}`);
+    assert.ok(s.sections[2].items.length <= data.limits.commonMax, `${s.ageGroup}/${s.sex}`);
   }
 });
 
