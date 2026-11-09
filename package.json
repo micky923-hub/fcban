@@ -1,0 +1,13 @@
+{
+  "name": "financial-diary",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "파이낸셜 다이어리 1단계 — 정적 HTML + Vanilla JS",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "sync": "node scripts/sync-data.mjs",
+    "serve": "node scripts/serve.mjs"
+  },
+  "engines": { "node": ">=20" }
+}
