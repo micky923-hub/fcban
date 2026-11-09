@@ -11,6 +11,8 @@
     "filter": "node ops/filter/cli.mjs",
     "filter:web": "node ops/filter/serve.mjs",
     "build": "node scripts/build.mjs",
+    "review": "node ops/review/server.mjs",
+    "review:agent": "node ops/review/agent.mjs",
     "serve": "node scripts/serve.mjs"
   },
   "engines": { "node": ">=20" }

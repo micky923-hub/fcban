@@ -1,0 +1,10 @@
+# 운영자 콘텐츠 작업물(초안·승인·발행 기록·로그)은 공개 저장소에 올리지 않는다 — SPEC §1 ops 비공개
+ops/drafts/*
+ops/approved/*
+ops/published/*
+ops/logs/*
+!ops/drafts/.gitkeep
+!ops/approved/.gitkeep
+!ops/published/.gitkeep
+!ops/logs/.gitkeep
+node_modules/
