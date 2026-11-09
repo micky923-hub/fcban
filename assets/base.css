@@ -205,6 +205,7 @@ button, input { font: inherit; color: inherit; }
   display: flex; flex-direction: column; gap: var(--sp-4);
 }
 .sheet__title { font-size: 18px; font-weight: 700; }
+.sheet__panel p { white-space: pre-line; } /* 원문 여러 문장을 줄바꿈으로 구분 */
 
 /* 오프라인 안내 줄 (SB-13) */
 .offline-banner { padding: var(--sp-3) var(--sp-4); border: 1px solid var(--c-line); border-radius: var(--radius); background: var(--c-bg-soft); font-size: 14px; color: var(--c-ink); }
