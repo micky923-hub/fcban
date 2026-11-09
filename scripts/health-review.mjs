@@ -59,8 +59,8 @@ if (differs.length) {
 }
 
 if (fpMeta?.missingFromDraft?.length) {
-  out.push('## ➕ 원문에 있는데 초안에 없는 항목 (넣을지 운영자 결정)', '', '| 항목 | 넣을 곳 | 대상 · 주기 | 출처 |', '|---|---|---|---|');
-  for (const m of fpMeta.missingFromDraft) out.push(`| ${cell(m.name)} | ${cell(m.where)} | ${cell(m.cycle)} | \`${m.sourceId}\` |`);
+  out.push('## ➕ 원문에 있는데 아직 넣지 않은 항목 (운영자 결정)', '', '| 항목 | 넣을 곳 | 대상 · 주기 | 출처 | 비고 |', '|---|---|---|---|---|');
+  for (const m of fpMeta.missingFromDraft) out.push(`| ${cell(m.name)} | ${cell(m.where)} | ${cell(m.cycle)} | \`${m.sourceId}\` | ${cell(m.note)} |`);
   out.push('', `> '흔히 챙기는 것' 최대 ${data.limits?.commonMax ?? '—'}개. 넣으면 넘치는 세트가 있는지 아래 '세트별 구성'에서 확인한다.`, '');
 }
 

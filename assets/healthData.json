@@ -12,34 +12,25 @@
       "method": "두 기관 공식 페이지를 WebFetch 로 읽어 항목별로 비교. 인용문은 페이지 요약 도구를 거쳤으므로 운영자가 원문 페이지에서 한 번 더 확인한다.",
       "missingFromDraft": [
         {
-          "name": "조기정신증 검사",
-          "where": "20대·30대",
-          "cycle": "20~34세 · 2년마다",
-          "sourceId": "S-HLT-01"
-        },
-        {
-          "name": "치면세균막검사",
-          "where": "40대",
-          "cycle": "40세",
-          "sourceId": "S-HLT-01"
-        },
-        {
-          "name": "C형간염 검사",
-          "where": "50대",
+          "name": "폐기능검사",
+          "where": "50s/female",
           "cycle": "56세",
-          "sourceId": "S-HLT-01"
+          "sourceId": "S-HLT-01",
+          "note": "상한 5개가 차서 넣지 않음"
         },
         {
           "name": "폐기능검사",
-          "where": "50대·60대",
-          "cycle": "56세 · 66세",
-          "sourceId": "S-HLT-01"
+          "where": "60s/female",
+          "cycle": "66세",
+          "sourceId": "S-HLT-01",
+          "note": "상한 5개가 차서 넣지 않음"
         },
         {
           "name": "생활습관평가",
-          "where": "60대",
+          "where": "60s/male, 60s/female",
           "cycle": "60세",
-          "sourceId": "S-HLT-01"
+          "sourceId": "S-HLT-01",
+          "note": "상한 5개가 차서 넣지 않음"
         }
       ]
     }
@@ -236,6 +227,19 @@
                 "note": "원문: 20~34세는 2년마다(20·22·24…34세) — 제안 반영(이전 표기: 20세)",
                 "checkedAt": "2026-11-09"
               }
+            },
+            {
+              "id": "cm-psychosis",
+              "name": "조기정신증 검사",
+              "cycle": "20세부터 · 2년마다",
+              "test": null,
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 20~34세 · 2년마다(20·22·24…34세) — 1차 대조에서 추가",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         }
@@ -333,6 +337,19 @@
               "firstPass": {
                 "status": "match",
                 "note": "원문: 20~34세는 2년마다(20·22·24…34세) — 제안 반영(이전 표기: 20세)",
+                "checkedAt": "2026-11-09"
+              }
+            },
+            {
+              "id": "cm-psychosis",
+              "name": "조기정신증 검사",
+              "cycle": "20세부터 · 2년마다",
+              "test": null,
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 20~34세 · 2년마다(20·22·24…34세) — 1차 대조에서 추가",
                 "checkedAt": "2026-11-09"
               }
             }
@@ -433,6 +450,19 @@
                 "note": "원문: 20~34세는 2년마다(…30·32·34세), 35~39세는 1회 — 제안 반영(이전 표기: 30세)",
                 "checkedAt": "2026-11-09"
               }
+            },
+            {
+              "id": "cm-psychosis",
+              "name": "조기정신증 검사",
+              "cycle": "34세까지 · 2년마다",
+              "test": null,
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 20~34세 · 2년마다(20·22·24…34세) — 1차 대조에서 추가",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         }
@@ -530,6 +560,19 @@
               "firstPass": {
                 "status": "match",
                 "note": "원문: 20~34세는 2년마다(…30·32·34세), 35~39세는 1회 — 제안 반영(이전 표기: 30세)",
+                "checkedAt": "2026-11-09"
+              }
+            },
+            {
+              "id": "cm-psychosis",
+              "name": "조기정신증 검사",
+              "cycle": "34세까지 · 2년마다",
+              "test": null,
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 20~34세 · 2년마다(20·22·24…34세) — 1차 대조에서 추가",
                 "checkedAt": "2026-11-09"
               }
             }
@@ -682,6 +725,19 @@
               "firstPass": {
                 "status": "match",
                 "note": "원문: 40·50·60·70세",
+                "checkedAt": "2026-11-09"
+              }
+            },
+            {
+              "id": "cm-plaque",
+              "name": "치면세균막검사",
+              "cycle": "40세",
+              "test": null,
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 — 1차 대조에서 추가",
                 "checkedAt": "2026-11-09"
               }
             }
@@ -862,6 +918,19 @@
                 "note": "원문: 40·50·60·70세",
                 "checkedAt": "2026-11-09"
               }
+            },
+            {
+              "id": "cm-plaque",
+              "name": "치면세균막검사",
+              "cycle": "40세",
+              "test": null,
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40세 — 1차 대조에서 추가",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         }
@@ -1026,6 +1095,32 @@
               "firstPass": {
                 "status": "match",
                 "note": "원문: 50~59세 중 1회 — 제안 반영(이전 표기: 50세)",
+                "checkedAt": "2026-11-09"
+              }
+            },
+            {
+              "id": "cm-hcv",
+              "name": "C형간염 검사",
+              "cycle": "56세",
+              "test": null,
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 56세 — 1차 대조에서 추가",
+                "checkedAt": "2026-11-09"
+              }
+            },
+            {
+              "id": "cm-lungfn",
+              "name": "폐기능검사",
+              "cycle": "56세",
+              "test": null,
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 56세, 66세 — 1차 대조에서 추가",
                 "checkedAt": "2026-11-09"
               }
             }
@@ -1233,6 +1328,19 @@
                 "note": "원문: 50~59세 중 1회 — 제안 반영(이전 표기: 50세)",
                 "checkedAt": "2026-11-09"
               }
+            },
+            {
+              "id": "cm-hcv",
+              "name": "C형간염 검사",
+              "cycle": "56세",
+              "test": null,
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 56세 — 1차 대조에서 추가",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         }
@@ -1410,6 +1518,19 @@
               "firstPass": {
                 "status": "match",
                 "note": "원문: 남성 24세 이상·여성 40세 이상 · 4년마다(남 24·28·32…, 여 40·44·48…)",
+                "checkedAt": "2026-11-09"
+              }
+            },
+            {
+              "id": "cm-lungfn",
+              "name": "폐기능검사",
+              "cycle": "66세",
+              "test": null,
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 56세, 66세 — 1차 대조에서 추가",
                 "checkedAt": "2026-11-09"
               }
             }
