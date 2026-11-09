@@ -11,29 +11,7 @@ export default {
       "checkedAt": "2026-11-09",
       "by": "Claude Code (1차 대조 — 확정 아님)",
       "method": "두 기관 공식 페이지를 WebFetch 로 읽어 항목별로 비교. 인용문은 페이지 요약 도구를 거쳤으므로 운영자가 원문 페이지에서 한 번 더 확인한다.",
-      "missingFromDraft": [
-        {
-          "name": "폐기능검사",
-          "where": "50s/female",
-          "cycle": "56세",
-          "sourceId": "S-HLT-01",
-          "note": "상한 5개가 차서 넣지 않음"
-        },
-        {
-          "name": "폐기능검사",
-          "where": "60s/female",
-          "cycle": "66세",
-          "sourceId": "S-HLT-01",
-          "note": "상한 5개가 차서 넣지 않음"
-        },
-        {
-          "name": "생활습관평가",
-          "where": "60s/male, 60s/female",
-          "cycle": "60세",
-          "sourceId": "S-HLT-01",
-          "note": "상한 5개가 차서 넣지 않음"
-        }
-      ]
+      "missingFromDraft": []
     }
   },
   "sources": {
@@ -101,8 +79,8 @@ export default {
     }
   ],
   "limits": {
-    "commonMax": 5,
-    "rule": "'이 나이대에 흔히 챙기는 것' 최대 항목 수(운영자 결정 2026-11-09: 3 → 4 → 5)"
+    "commonMax": 7,
+    "rule": "'이 나이대에 흔히 챙기는 것' 최대 항목 수(운영자 결정 2026-11-09: 3 → 4 → 5 → 7)"
   },
   "info": {
     "liverHighRisk": {
@@ -1342,6 +1320,19 @@ export default {
                 "note": "원문: 56세 — 1차 대조에서 추가",
                 "checkedAt": "2026-11-09"
               }
+            },
+            {
+              "id": "cm-lungfn",
+              "name": "폐기능검사",
+              "cycle": "56세",
+              "test": null,
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 56세, 66세 — 1차 대조에서 추가",
+                "checkedAt": "2026-11-09"
+              }
             }
           ]
         }
@@ -1532,6 +1523,19 @@ export default {
               "firstPass": {
                 "status": "match",
                 "note": "원문: 56세, 66세 — 1차 대조에서 추가",
+                "checkedAt": "2026-11-09"
+              }
+            },
+            {
+              "id": "cm-lifestyle",
+              "name": "생활습관평가",
+              "cycle": "60세",
+              "test": "설문",
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40·50·60·70세 — 1차 대조에서 추가",
                 "checkedAt": "2026-11-09"
               }
             }
@@ -1750,6 +1754,32 @@ export default {
               "firstPass": {
                 "status": "match",
                 "note": "원문: 남성 24세 이상·여성 40세 이상 · 4년마다(남 24·28·32…, 여 40·44·48…)",
+                "checkedAt": "2026-11-09"
+              }
+            },
+            {
+              "id": "cm-lungfn",
+              "name": "폐기능검사",
+              "cycle": "66세",
+              "test": null,
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 56세, 66세 — 1차 대조에서 추가",
+                "checkedAt": "2026-11-09"
+              }
+            },
+            {
+              "id": "cm-lifestyle",
+              "name": "생활습관평가",
+              "cycle": "60세",
+              "test": "설문",
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null,
+              "firstPass": {
+                "status": "match",
+                "note": "원문: 40·50·60·70세 — 1차 대조에서 추가",
                 "checkedAt": "2026-11-09"
               }
             }
