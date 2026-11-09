@@ -1232,6 +1232,14 @@ export default {
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "reviewNote": "남성 24세 이상 · 여성 40세 이상, 4년 주기 — 현행 기준 확인"
+            },
+            {
+              "id": "cm-lifestyle",
+              "name": "생활습관평가",
+              "cycle": "70세",
+              "test": "설문",
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null
             }
           ]
         }
@@ -1368,6 +1376,14 @@ export default {
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "reviewNote": "남성 24세 이상 · 여성 40세 이상, 4년 주기 — 현행 기준 확인"
+            },
+            {
+              "id": "cm-lifestyle",
+              "name": "생활습관평가",
+              "cycle": "70세",
+              "test": "설문",
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null
             }
           ]
         }
