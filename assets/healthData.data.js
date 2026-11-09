@@ -471,6 +471,14 @@ export default {
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "reviewNote": "10년 주기(20·30·40·50·60·70세) 현행 여부 확인"
+            },
+            {
+              "id": "cm-lifestyle",
+              "name": "생활습관평가",
+              "cycle": "40세",
+              "test": "설문",
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null
             }
           ]
         }
@@ -588,6 +596,14 @@ export default {
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "reviewNote": "10년 주기(20·30·40·50·60·70세) 현행 여부 확인"
+            },
+            {
+              "id": "cm-lifestyle",
+              "name": "생활습관평가",
+              "cycle": "40세",
+              "test": "설문",
+              "sourceId": "S-HLT-01",
+              "reviewedAt": null
             }
           ]
         }
