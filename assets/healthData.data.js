@@ -228,14 +228,13 @@ export default {
             {
               "id": "cm-mental",
               "name": "정신건강검사(우울증)",
-              "cycle": "20세",
+              "cycle": "20세부터 · 2년마다",
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
-                "note": "원문: 20~34세는 2년마다(20·22·24…34세)",
-                "proposal": "주기를 \"20세부터 · 2년마다\"로",
+                "status": "match",
+                "note": "원문: 20~34세는 2년마다(20·22·24…34세) — 제안 반영(이전 표기: 20세)",
                 "checkedAt": "2026-11-09"
               }
             }
@@ -328,14 +327,13 @@ export default {
             {
               "id": "cm-mental",
               "name": "정신건강검사(우울증)",
-              "cycle": "20세",
+              "cycle": "20세부터 · 2년마다",
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
-                "note": "원문: 20~34세는 2년마다(20·22·24…34세)",
-                "proposal": "주기를 \"20세부터 · 2년마다\"로",
+                "status": "match",
+                "note": "원문: 20~34세는 2년마다(20·22·24…34세) — 제안 반영(이전 표기: 20세)",
                 "checkedAt": "2026-11-09"
               }
             }
@@ -427,14 +425,13 @@ export default {
             {
               "id": "cm-mental",
               "name": "정신건강검사(우울증)",
-              "cycle": "30세",
+              "cycle": "34세까지 2년마다 · 35~39세 중 1회",
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
-                "note": "원문: 20~34세는 2년마다(…30·32·34세), 35~39세는 1회",
-                "proposal": "주기를 \"34세까지 2년마다 · 35~39세 중 1회\"로",
+                "status": "match",
+                "note": "원문: 20~34세는 2년마다(…30·32·34세), 35~39세는 1회 — 제안 반영(이전 표기: 30세)",
                 "checkedAt": "2026-11-09"
               }
             }
@@ -527,14 +524,13 @@ export default {
             {
               "id": "cm-mental",
               "name": "정신건강검사(우울증)",
-              "cycle": "30세",
+              "cycle": "34세까지 2년마다 · 35~39세 중 1회",
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
-                "note": "원문: 20~34세는 2년마다(…30·32·34세), 35~39세는 1회",
-                "proposal": "주기를 \"34세까지 2년마다 · 35~39세 중 1회\"로",
+                "status": "match",
+                "note": "원문: 20~34세는 2년마다(…30·32·34세), 35~39세는 1회 — 제안 반영(이전 표기: 30세)",
                 "checkedAt": "2026-11-09"
               }
             }
@@ -667,14 +663,13 @@ export default {
             {
               "id": "cm-mental",
               "name": "정신건강검사(우울증)",
-              "cycle": "40세",
+              "cycle": "40~49세 중 1회",
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
-                "note": "원문: 40~49세 중 1회",
-                "proposal": "주기를 \"40~49세 중 1회\"로",
+                "status": "match",
+                "note": "원문: 40~49세 중 1회 — 제안 반영(이전 표기: 40세)",
                 "checkedAt": "2026-11-09"
               }
             },
@@ -846,14 +841,13 @@ export default {
             {
               "id": "cm-mental",
               "name": "정신건강검사(우울증)",
-              "cycle": "40세",
+              "cycle": "40~49세 중 1회",
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
-                "note": "원문: 40~49세 중 1회",
-                "proposal": "주기를 \"40~49세 중 1회\"로",
+                "status": "match",
+                "note": "원문: 40~49세 중 1회 — 제안 반영(이전 표기: 40세)",
                 "checkedAt": "2026-11-09"
               }
             },
@@ -1026,14 +1020,13 @@ export default {
             {
               "id": "cm-mental",
               "name": "정신건강검사(우울증)",
-              "cycle": "50세",
+              "cycle": "50~59세 중 1회",
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
-                "note": "원문: 50~59세 중 1회",
-                "proposal": "주기를 \"50~59세 중 1회\"로",
+                "status": "match",
+                "note": "원문: 50~59세 중 1회 — 제안 반영(이전 표기: 50세)",
                 "checkedAt": "2026-11-09"
               }
             }
@@ -1232,14 +1225,13 @@ export default {
             {
               "id": "cm-mental",
               "name": "정신건강검사(우울증)",
-              "cycle": "50세",
+              "cycle": "50~59세 중 1회",
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
-                "note": "원문: 50~59세 중 1회",
-                "proposal": "주기를 \"50~59세 중 1회\"로",
+                "status": "match",
+                "note": "원문: 50~59세 중 1회 — 제안 반영(이전 표기: 50세)",
                 "checkedAt": "2026-11-09"
               }
             }
@@ -1399,14 +1391,13 @@ export default {
             {
               "id": "cm-mental",
               "name": "정신건강검사(우울증)",
-              "cycle": "60세",
+              "cycle": "60~69세 중 1회",
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
-                "note": "원문: 60~69세 중 1회",
-                "proposal": "주기를 \"60~69세 중 1회\"로",
+                "status": "match",
+                "note": "원문: 60~69세 중 1회 — 제안 반영(이전 표기: 60세)",
                 "checkedAt": "2026-11-09"
               }
             },
@@ -1579,14 +1570,13 @@ export default {
             {
               "id": "cm-bone",
               "name": "골밀도 검사",
-              "cycle": "66세",
+              "cycle": "60세 · 66세",
               "test": "골밀도 측정",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
-                "note": "원문: 여성 54·60·66세 — 60세가 빠져 있음",
-                "proposal": "60대 여성 주기를 \"60세 · 66세\"로",
+                "status": "match",
+                "note": "원문: 여성 54·60·66세 — 60세가 빠져 있음 — 제안 반영(이전 표기: 66세)",
                 "checkedAt": "2026-11-09"
               }
             },
@@ -1619,14 +1609,13 @@ export default {
             {
               "id": "cm-mental",
               "name": "정신건강검사(우울증)",
-              "cycle": "60세",
+              "cycle": "60~69세 중 1회",
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
-                "note": "원문: 60~69세 중 1회",
-                "proposal": "주기를 \"60~69세 중 1회\"로",
+                "status": "match",
+                "note": "원문: 60~69세 중 1회 — 제안 반영(이전 표기: 60세)",
                 "checkedAt": "2026-11-09"
               }
             },
@@ -1799,14 +1788,13 @@ export default {
             {
               "id": "cm-mental",
               "name": "정신건강검사(우울증)",
-              "cycle": "70세",
+              "cycle": "70~79세 중 1회",
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
-                "note": "원문: 70~79세 중 1회",
-                "proposal": "주기를 \"70~79세 중 1회\"로",
+                "status": "match",
+                "note": "원문: 70~79세 중 1회 — 제안 반영(이전 표기: 70세)",
                 "checkedAt": "2026-11-09"
               }
             },
@@ -2018,14 +2006,13 @@ export default {
             {
               "id": "cm-mental",
               "name": "정신건강검사(우울증)",
-              "cycle": "70세",
+              "cycle": "70~79세 중 1회",
               "test": "설문",
               "sourceId": "S-HLT-01",
               "reviewedAt": null,
               "firstPass": {
-                "status": "differs",
-                "note": "원문: 70~79세 중 1회",
-                "proposal": "주기를 \"70~79세 중 1회\"로",
+                "status": "match",
+                "note": "원문: 70~79세 중 1회 — 제안 반영(이전 표기: 70세)",
                 "checkedAt": "2026-11-09"
               }
             },
